@@ -18,7 +18,8 @@ await migrate(db);
 await seedBase(db);
 const hub = new EventHub(db, url);
 await hub.start();
-const app = await buildApp({ db, hub, logger: true, secureCookies: process.env.COOKIE_SECURE === 'true' });
+const app = await buildApp({ db, hub, logger: true, webDir: 'web/dist', secureCookies: process.env.COOKIE_SECURE === 'true' });
+console.log(`CANDY Control Room: http://${host === '0.0.0.0' ? 'localhost' : host}:${port}`);
 await app.listen({ port, host });
 
 const shutdown = async () => {

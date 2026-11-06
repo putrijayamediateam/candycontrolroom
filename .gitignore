@@ -3,3 +3,4 @@ node_modules
 .local-owner-password
 .local-pg-password
 .install.log
+web/dist

@@ -1,5 +1,5 @@
 import { createReadStream, existsSync, statSync } from 'node:fs';
-import { extname, resolve, sep } from 'node:path';
+import { extname, join, resolve, sep } from 'node:path';
 import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import type { Db } from './db/pool.js';
@@ -24,6 +24,8 @@ export interface AppOptions {
   db: Db;
   hub?: EventHub | null;
   assetsDir?: string;
+  /** Built web app directory (web/dist). When set, non-API paths serve the app. */
+  webDir?: string;
   secureCookies?: boolean;
   logger?: boolean;
   /** Heartbeat interval for the event stream (ms). */
@@ -348,7 +350,7 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
 
   app.get('/api/reviews/awaiting', async () => {
     const r = await db.query(
-      `SELECT rr.*, t.title, t.ref AS task_ref, t.template, t.platforms, t.is_demo, v.version, v.platform, v.copy_text, v.asset_keys,
+      `SELECT rr.*, t.title, t.ref AS task_ref, t.template, t.kind AS task_kind, t.stage AS task_stage, t.platforms, t.is_demo, t.requires_clinical, t.requires_consent, v.version, v.platform, v.copy_text, v.asset_keys,
               v.destination, v.content_locale, v.content_hash, s.display_name AS submitted_by_name
          FROM review_requests rr JOIN tasks t ON t.id=rr.task_id JOIN deliverable_versions v ON v.id=rr.version_id JOIN staff s ON s.id=rr.submitted_by
         WHERE rr.status='awaiting_ain' ORDER BY rr.submitted_at`);
@@ -460,6 +462,14 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
     return { date: day, core_platforms: CORE_PLATFORMS, counters: await dailyCounters(db, day) };
   });
 
+  app.get('/api/posts', async (req) => {
+    const q = z.object({ date: DAY.optional() }).parse(req.query);
+    const day = q.date ?? myDate();
+    const r = await db.query(
+      `SELECT p.*, t.ref AS task_ref, t.title FROM platform_posts p JOIN tasks t ON t.id=p.task_id WHERE p.my_date=$1 ORDER BY p.slot_at, p.platform`, [day]);
+    return { date: day, posts: r.rows };
+  });
+
   app.get('/api/targets', async () => ({ targets: (await db.query(`SELECT * FROM daily_targets ORDER BY platform`)).rows }));
 
   app.put('/api/targets/:platform', async (req) => {
@@ -564,5 +574,45 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
     return reply.type(MIME[extname(full).toLowerCase()]).send(createReadStream(full));
   });
 
+  // ---------- Asset library: every file referenced by a deliverable version ----------
+  app.get('/api/library', async () => {
+    const r = await db.query(
+      `SELECT a.key, v.id AS version_id, v.version, v.platform, v.content_locale, v.created_at, t.id AS task_id, t.ref AS task_ref, t.title, t.is_demo,
+              (SELECT rr.status FROM review_requests rr WHERE rr.version_id=v.id ORDER BY rr.submitted_at DESC LIMIT 1) AS review_status
+         FROM deliverable_versions v JOIN tasks t ON t.id=v.task_id, unnest(v.asset_keys) AS a(key)
+        ORDER BY v.created_at DESC LIMIT 500`);
+    return {
+      assets: r.rows.map((x) => {
+        const rel = String(x.key).replace(/^assets\//, '');
+        const full = resolve(assetsDir, rel);
+        const available = full.startsWith(assetsDir + sep) && existsSync(full) && !!MIME[extname(full).toLowerCase()];
+        return { ...x, url: available ? `/api/assets/${rel}` : null, available, mime: MIME[extname(full).toLowerCase()] ?? null };
+      }),
+    };
+  });
+
+  // ---------- Built web app (web/dist) ----------
+  const webDir = opts.webDir ? resolve(opts.webDir) : null;
+  app.get('/*', async (req, reply) => {
+    if (req.url.startsWith('/api/')) return reply.code(404).send({ error: 'not_found', message: 'Unknown API route' });
+    if (!webDir || !existsSync(join(webDir, 'index.html'))) {
+      return reply.code(404).type('text/plain; charset=utf-8').send('The web app has not been built yet. Run: corepack pnpm build:web');
+    }
+    const rel = decodeURIComponent((req.params as { '*': string })['*'] || 'index.html');
+    let full = resolve(webDir, rel);
+    if (!full.startsWith(webDir + sep) || !existsSync(full) || !statSync(full).isFile()) full = join(webDir, 'index.html');
+    const ext = extname(full).toLowerCase();
+    const type = WEB_MIME[ext] ?? MIME[ext] ?? 'application/octet-stream';
+    reply.header('x-content-type-options', 'nosniff');
+    reply.header('cache-control', full.includes(`${sep}assets${sep}`) ? 'public, max-age=31536000, immutable' : 'no-cache');
+    if (ext === '.html') reply.header('content-security-policy', "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'");
+    return reply.type(type).send(createReadStream(full));
+  });
+
   return app;
 }
+
+const WEB_MIME: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ico': 'image/x-icon',
+};

@@ -26,7 +26,8 @@ pnpm install
 createdb candy && createdb candy_test
 export DATABASE_URL=postgres://postgres@localhost:5433/candy
 pnpm migrate && pnpm seed
-pnpm test        # 46 tests (core + API/SSE), uses candy_test via TEST_DATABASE_URL (see .env)
+pnpm test        # 54 tests (core + API/SSE + locales/web serving), uses candy_test via TEST_DATABASE_URL (see .env)
+pnpm build:web && pnpm start:api   # open http://127.0.0.1:3100
 # AIN's Windows PC: Node 22 + PostgreSQL 16 (port 5433, service) installed via winget; pnpm via `corepack pnpm`.
 # Local DB password is in .local-pg-password; load .env into the shell before running scripts.
 npx tsx scripts/submit-posters.ts     # records the 8 posters as CPRs (creates AIN owner; password in .local-owner-password)
@@ -51,11 +52,18 @@ python3 assets/build.py               # regenerates posters (needs playwright + 
 - Live stream: trigger in migration 002 → `pg_notify('candy_events', seq)` → `EventHub` (src/server/events.ts). `auth.*` events are not streamed.
 - Staff/CANDY actions (submit, CANDY review) are not HTTP routes for humans; they will come from the staff-execution worker.
 
+## Web app (web/)
+- React 19 + Vite 8 + i18next. `corepack pnpm build:web` → `web/dist`, served by the API at http://127.0.0.1:3100. Dev: `start:api` + `dev:web` (Vite on 5173 proxies /api).
+- Hash routes `#/overview`, `#/team/<staffId>`, `#/work/<taskId>`, `#/approvals`, `#/prs`, `#/calendar`, `#/assets`, `#/community`, `#/performance`, `#/integrations`, `#/activity`, `#/studio`, `#/settings`.
+- All UI text lives in `web/src/locales/en.json` and `ms.json` (same keys — `test/web.test.ts` fails on any missing key, unlabelled event type, stage, template or policy error code). Use literal `t('a.b')` keys so the test can see them.
+- `useApi(path)` reloads on every live event (`LiveProvider`, EventSource with Last-Event-ID). Server-side policy errors map to `errors.<code>`.
+- Staff role titles and task titles are stored data and stay as written (not translated).
+
 ## Status (6 Nov 2026)
-Done and tested: Milestone 1 core + auth/REST/SSE (46 tests passing). First creative batch: CPR-20261106-001..008 awaiting AIN.
+Done and tested: Milestone 1 core + auth/REST/SSE + 13-screen web app in en/ms (54 tests passing). First creative batch: CPR-20261106-001..008 awaiting AIN in her local DB.
 Next, in order:
 1. ~~Auth/session API + REST routes + SSE~~ done.
-2. React app: 13 screens (Overview, Team and Training, Work Board, Approval Inbox, Daily PRs, Calendar, Assets, Community, Performance, Integrations, Activity/Delegation Log, Designer Studio, Settings) with `en`/`ms` locale files and onboarding language step.
+2. ~~React app: 13 screens with en/ms and onboarding language step~~ done (2D office list as fallback).
 3. 3D office (R3F) driven only by `events`, Designer Team wing, 2D fallback, reduced motion.
 4. Demo mode with labelled synthetic data.
 5. Staff execution via AIN's Claude usage (see DECISIONS.md) — no separate API key.

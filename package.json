@@ -9,20 +9,32 @@
     "dev:api": "tsx watch --env-file=.env src/server/index.ts",
     "start:api": "tsx --env-file=.env src/server/index.ts",
     "owner:reset": "tsx --env-file=.env scripts/reset-owner-password.ts",
+    "dev:web": "vite --config web/vite.config.ts",
+    "build:web": "vite build --config web/vite.config.ts",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit && tsc --noEmit -p web"
   },
   "dependencies": {
+    "@fontsource/great-vibes": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0",
     "@node-rs/argon2": "^2.2.2",
     "fastify": "^5.12.8",
+    "i18next": "^26.7.1",
     "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-i18next": "^17.1.12",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
     "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
+    "vite": "^8.3.6",
     "vitest": "^5.1.0"
   }
 }

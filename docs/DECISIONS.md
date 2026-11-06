@@ -27,8 +27,10 @@ Open: AIN to confirm prices/dates still current; Tabung Haji logo permission; co
 | Poster generator + 8 posters | Working; awaiting AIN approval (CPR-20261106-001..008 loaded in AIN's local DB) |
 | Auth (Argon2, hashed DB sessions, throttling, CSRF header), REST API, SSE stream with replay | Working and verified (22 API tests + local smoke test on AIN's PC, 6 Nov 2026) |
 | Local run on AIN's Windows PC (Node 22, PostgreSQL 16 service, port 5433) | Working |
-| Web UI (13 screens, en/ms) | Planned |
-| 3D office + 2D fallback | Planned |
+| Web UI: 13 screens, sign-in, first-run language step, BECOME ME panel / I'M DONE briefing, live updates, en + ms | Working and verified (8 locale/serving tests; browser walkthrough on a test copy, desktop + phone width) |
+| 2D office view (accessible fallback) | Working (list built from stored staff state) |
+| 3D office | Planned (next milestone) |
+| Asset uploads, Ask Question to staff, task blocker clearing | Planned |
 | Staff execution via Claude sessions | Planned |
 | Meta / TikTok / GBP publishing | Requires connection + platform app review |
 | Analytics | Requires connections |
