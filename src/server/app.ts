@@ -15,6 +15,7 @@ import { CORE_PLATFORMS, dailyCounters, dailyPrList, toCsv } from './core/report
 import { answerQuestion, briefStaff, currentInstructions, questionDigest } from './core/staff.js';
 import { myDate } from '../shared/time.js';
 import { verify } from '@node-rs/argon2';
+import { registerUploadRoutes } from './uploads.js';
 
 declare module 'fastify' {
   interface FastifyRequest { user?: SessionUser; sessionToken?: string }
@@ -26,6 +27,9 @@ export interface AppOptions {
   assetsDir?: string;
   /** Built web app directory (web/dist). When set, non-API paths serve the app. */
   webDir?: string;
+  /** Private storage for uploads (default ./storage). */
+  storageDir?: string;
+  maxUploadBytes?: number;
   secureCookies?: boolean;
   logger?: boolean;
   /** Heartbeat interval for the event stream (ms). */
@@ -46,6 +50,9 @@ function requireOwner(req: FastifyRequest) {
 
 function statusFor(code: string) {
   if (code === 'not_found') return 404;
+  if (code === 'file_too_large') return 413;
+  if (code === 'unsupported_file' || code === 'file_type_mismatch') return 415;
+  if (code === 'upload_failed') return 400;
   if (['forbidden', 'self_approval', 'human_only_check'].includes(code)) return 403;
   if (['invalid_input', 'unknown_template', 'invalid_stage', 'bad_duration', 'unknown_command', 'evidence_required'].includes(code)) return 400;
   return 409;
@@ -573,6 +580,9 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
     reply.header('x-content-type-options', 'nosniff');
     return reply.type(MIME[extname(full).toLowerCase()]).send(createReadStream(full));
   });
+
+  // ---------- Staff training uploads (images, videos, zip) ----------
+  registerUploadRoutes(app, { db, storageDir: opts.storageDir ?? resolve(process.cwd(), 'storage'), maxBytes: opts.maxUploadBytes ?? 500 * 1024 * 1024 });
 
   // ---------- Asset library: every file referenced by a deliverable version ----------
   app.get('/api/library', async () => {

@@ -6,6 +6,7 @@ import { useSession } from '../session';
 import { fmtDateTime } from '../format';
 import { Async, Avatar, Badge, Card, Empty, ErrorNote, EvidenceBadge, Field, PageHeader, SideStateBadge, StageBadge, Tabs } from '../ui';
 import { DEPARTMENTS } from './office';
+import { TrainingFiles } from './TrainingFiles';
 
 export function Team({ param }: { param?: string }) {
   const { t } = useTranslation();
@@ -87,7 +88,12 @@ function StaffProfile({ id }: { id: string }) {
               ...(isOwner ? [{ id: 'edit' as const, label: t('team.tabEdit') }] : []),
             ]} />
 
-            {tab === 'brief' && <BriefForm staff={s} current={d.instructions[0]} onSaved={() => { st.reload(); setTab('history'); }} />}
+            {tab === 'brief' && (
+              <>
+                <BriefForm staff={s} current={d.instructions[0]} onSaved={() => { st.reload(); setTab('history'); }} />
+                <TrainingFiles staffId={s.id} staffName={s.display_name} />
+              </>
+            )}
             {tab === 'history' && (d.instructions.length ? (
               <ol className="history">
                 {d.instructions.map((i: any) => (

@@ -204,6 +204,31 @@
     "pause": "Jeda staf ini",
     "resume": "Sambung semula staf ini"
   },
+  "training": {
+    "title": "Fail latihan ({{count}})",
+    "explain": "Muat naik imej, video atau fail zip yang menunjukkan kepada {{name}} apa yang anda mahu: kerja lepas, rujukan gaya, contoh baik dan buruk.",
+    "category": "Apakah ini?",
+    "cat_reference": "Bahan rujukan",
+    "cat_approved_example": "Contoh baik (buat seperti ini)",
+    "cat_rejected_example": "Contoh buruk (elakkan ini)",
+    "note": "Nota (pilihan)",
+    "noteHint": "cth. “Guna gaya warna ini untuk poster Hari Raya”.",
+    "upload": "Muat naik fail",
+    "uploading": "Sedang dimuat naik…",
+    "dropHint": "Atau seret fail ke sini. Imej (PNG, JPG, WEBP, GIF), video (MP4, MOV, WEBM) atau ZIP, sehingga {{max}} setiap satu.",
+    "uploaded": "Dimuat naik",
+    "failed": "Tidak dimuat naik",
+    "empty": "Belum ada fail latihan",
+    "emptyHint": "Fail yang dimuat naik akan dipaparkan di sini untuk staf ini dan CANDY.",
+    "kind_image": "Imej",
+    "kind_video": "Video",
+    "kind_zip": "Arkib ZIP",
+    "zipStored": "Disimpan seadanya. Tidak dibuka atau dinyahmampat.",
+    "download": "Muat turun",
+    "remove": "Alih keluar",
+    "removeConfirm": "Alih keluar “{{name}}” daripada latihan staf ini? Fail kekal dalam simpanan dan tindakan ini direkodkan.",
+    "safety": "Fail adalah peribadi dan hanya untuk latihan. Apa-apa yang tertulis di dalam fail dianggap sebagai bahan rujukan, bukan arahan atau kebenaran. Jangan muat naik imej pesakit tanpa rekod persetujuan."
+  },
   "work": {
     "subtitle": "Setiap tugasan, peringkat, pemilik dan halangannya.",
     "newTask": "Tugasan baharu",
@@ -592,7 +617,7 @@
       "dispatching": "Dihantar ke platform", "published": "Diterbitkan (disahkan oleh platform)", "outcome_unknown": "Keputusan terbitan tidak diketahui"
     },
     "publishing": { "paused": "Penerbitan dijeda", "resumed": "Penerbitan disambung semula" },
-    "staff": { "briefed": "Staf diberi taklimat", "updated": "Profil staf disunting", "paused": "Staf dijeda", "resumed": "Staf disambung semula" },
+    "staff": { "briefed": "Staf diberi taklimat", "updated": "Profil staf disunting", "paused": "Staf dijeda", "resumed": "Staf disambung semula", "training_file_added": "Fail latihan dimuat naik", "training_file_removed": "Fail latihan dialih keluar" },
     "question": { "asked": "Soalan untuk AIN", "answered": "Soalan dijawab" },
     "settings": { "language_changed": "Bahasa ditukar", "targets_changed": "Sasaran harian ditukar" },
     "auth": { "login": "Log masuk", "logout": "Log keluar", "password_changed": "Kata laluan ditukar" }
@@ -634,6 +659,10 @@
     "no_target": "Pilih seorang staf, satu jabatan, atau seluruh pasukan.",
     "not_open": "Soalan itu sudah dijawab.",
     "unknown_template": "Templat tugasan itu tidak wujud.",
-    "invalid_stage": "Peringkat itu bukan sebahagian daripada aliran kerja tugasan ini."
+    "invalid_stage": "Peringkat itu bukan sebahagian daripada aliran kerja tugasan ini.",
+    "file_too_large": "Fail itu terlalu besar.",
+    "unsupported_file": "Jenis fail itu tidak dibenarkan. Gunakan imej, video atau fail ZIP.",
+    "file_type_mismatch": "Kandungan fail tidak sepadan dengan namanya, jadi ia tidak disimpan.",
+    "upload_failed": "Muat naik terganggu. Tiada apa yang disimpan; sila cuba lagi."
   }
 }

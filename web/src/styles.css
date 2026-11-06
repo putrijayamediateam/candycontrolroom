@@ -212,6 +212,19 @@ th { font-weight: 600; background: var(--pink-50); font-size: 0.8rem; }
 .asset-missing { aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; background: var(--pink-50); color: var(--muted); }
 .asset figcaption { padding: 0.6rem; display: flex; flex-direction: column; gap: 0.25rem; }
 
+/* Training uploads */
+.training-files { border-top: 1px solid var(--line); margin-top: 1.25rem; padding-top: 1rem; }
+.dropzone { border: 2px dashed var(--pink-300); border-radius: var(--radius); padding: 0.9rem 1rem; background: var(--pink-50); margin-bottom: 1rem; }
+.dropzone.dragging { background: var(--pink-100); border-color: var(--pink-600); }
+.upload-queue { margin-top: 0.6rem; }
+.upload-queue progress { width: 100%; height: 8px; accent-color: var(--pink-600); }
+.training-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.75rem; margin-bottom: 0.75rem; }
+.training-grid .asset img, .training-grid .asset video { aspect-ratio: 1 / 1; object-fit: cover; }
+.training-grid .asset video { background: #000; object-fit: contain; }
+.zip-icon { font-size: 2rem; display: block; margin-bottom: 0.3rem; }
+.asset-missing { flex-direction: column; }
+.break { overflow-wrap: anywhere; }
+
 /* Calendar, integrations, studio */
 .targets { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0.75rem; }
 .target-row { display: flex; flex-direction: column; gap: 0.5rem; }

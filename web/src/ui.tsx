@@ -72,7 +72,7 @@ export function Loading() {
   return <div className="loading" role="status" aria-live="polite"><span className="spinner" aria-hidden="true" />{t('common.loading')}</div>;
 }
 
-const DETAIL_CODES = new Set(['gates_unmet', 'dependency_open', 'task_paused', 'skip_not_allowed', 'out_of_scope', 'not_authorized', 'invalid_stage', 'wrong_state', 'stale_version', 'too_many_attempts']);
+const DETAIL_CODES = new Set(['gates_unmet', 'dependency_open', 'task_paused', 'skip_not_allowed', 'out_of_scope', 'not_authorized', 'invalid_stage', 'wrong_state', 'stale_version', 'too_many_attempts', 'file_too_large', 'unsupported_file']);
 
 export function ErrorNote({ error, onRetry }: { error: ApiError | null; onRetry?: () => void }) {
   const { t } = useTranslation();

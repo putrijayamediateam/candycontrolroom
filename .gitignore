@@ -4,3 +4,4 @@ node_modules
 .local-pg-password
 .install.log
 web/dist
+storage/

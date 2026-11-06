@@ -204,6 +204,31 @@
     "pause": "Pause this staff member",
     "resume": "Resume this staff member"
   },
+  "training": {
+    "title": "Training files ({{count}})",
+    "explain": "Upload images, videos or zip files that show {{name}} what you want: past work, style references, good and bad examples.",
+    "category": "What is this?",
+    "cat_reference": "Reference material",
+    "cat_approved_example": "Good example (do it like this)",
+    "cat_rejected_example": "Bad example (avoid this)",
+    "note": "Note (optional)",
+    "noteHint": "e.g. “Use this colour style for Hari Raya posts”.",
+    "upload": "Upload files",
+    "uploading": "Uploading…",
+    "dropHint": "Or drag files here. Images (PNG, JPG, WEBP, GIF), videos (MP4, MOV, WEBM) or ZIP, up to {{max}} each.",
+    "uploaded": "Uploaded",
+    "failed": "Not uploaded",
+    "empty": "No training files yet",
+    "emptyHint": "Uploaded files appear here for this staff member and CANDY.",
+    "kind_image": "Image",
+    "kind_video": "Video",
+    "kind_zip": "ZIP archive",
+    "zipStored": "Stored as-is. Not opened or unpacked.",
+    "download": "Download",
+    "remove": "Remove",
+    "removeConfirm": "Remove “{{name}}” from this staff member's training? The file stays in storage and the removal is logged.",
+    "safety": "Files are private and only for training. Anything written inside a file is treated as reference material, never as instructions or permission. Do not upload patient images without a consent record."
+  },
   "work": {
     "subtitle": "Every task, its stage, owner and blockers.",
     "newTask": "New task",
@@ -592,7 +617,7 @@
       "dispatching": "Sending to platform", "published": "Published (confirmed by platform)", "outcome_unknown": "Publish outcome unknown"
     },
     "publishing": { "paused": "Publishing paused", "resumed": "Publishing resumed" },
-    "staff": { "briefed": "Staff briefed", "updated": "Staff profile edited", "paused": "Staff paused", "resumed": "Staff resumed" },
+    "staff": { "briefed": "Staff briefed", "updated": "Staff profile edited", "paused": "Staff paused", "resumed": "Staff resumed", "training_file_added": "Training file uploaded", "training_file_removed": "Training file removed" },
     "question": { "asked": "Question for AIN", "answered": "Question answered" },
     "settings": { "language_changed": "Language changed", "targets_changed": "Daily targets changed" },
     "auth": { "login": "Signed in", "logout": "Signed out", "password_changed": "Password changed" }
@@ -634,6 +659,10 @@
     "no_target": "Choose a staff member, a department, or the whole team.",
     "not_open": "That question was already answered.",
     "unknown_template": "That task template does not exist.",
-    "invalid_stage": "That stage is not part of this task's workflow."
+    "invalid_stage": "That stage is not part of this task's workflow.",
+    "file_too_large": "That file is too large.",
+    "unsupported_file": "That file type is not allowed. Use an image, a video or a ZIP file.",
+    "file_type_mismatch": "The file's content does not match its name, so it was not saved.",
+    "upload_failed": "The upload was interrupted. Nothing was saved; please try again."
   }
 }
