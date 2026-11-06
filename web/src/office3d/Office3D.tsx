@@ -12,6 +12,7 @@ import { buildLayout, toWorld, ZONES, type Furniture, type Layout } from './layo
 import { eventToActions, maxSeq, newEvents, type Marker, type PersonState, type StaffRecord, type TaskRecord } from './mapping';
 import { appearanceFor, type Appearance } from './appearance';
 import { Crowd } from './crowd';
+import { placeZoneLabels, zoneEdgeCandidates, type Box, type Size, type ZoneLabelInput } from './labels';
 
 export interface Office3DLabels {
   marker: Record<Marker, string>;
@@ -100,27 +101,53 @@ export default function Office3D(p: Office3DProps) {
 }
 
 // ---------- Labels (Aisha): plain DOM buttons over the canvas, so they stay keyboard reachable ----------
-interface Anchor { el: HTMLElement; staffId?: string; world?: [number, number, number]; height: number }
+interface Anchor {
+  el: HTMLElement; staffId?: string; height: number;
+  /** Zone labels: candidate world points along the zone's edges, most preferred first. */
+  zone?: [number, number, number][];
+  size?: Size; sizedAt?: number;
+}
 
-/** Projects every label's 3D anchor to screen space each frame (no React re-render). */
+/**
+ * Projects every label's 3D anchor to screen space each frame (no React re-render).
+ * Name tags go where their person is; zone labels then take the first free spot on
+ * their zone's edge inside the canvas, or hide when every spot is covered.
+ */
 function Projector({ anchors, crowd }: { anchors: Map<string, Anchor>; crowd: Crowd }) {
   const v = useMemo(() => new Vector3(), []);
+  const frame = useRef(0);
   useFrame(({ camera, size }) => {
     const detail = camera.zoom >= 30 ? '1' : '0';
-    for (const a of anchors.values()) {
-      if (a.staffId) {
-        const b = crowd.bodies.get(a.staffId);
-        if (!b) continue;
-        v.set(b.x, (b.seated ? 2.0 : 2.3) * a.height, b.z);
-        const g = b.gesture ?? '';
-        if (a.el.dataset.gesture !== g) a.el.dataset.gesture = g;
-        if (a.el.dataset.detail !== detail) a.el.dataset.detail = detail;
-      } else if (a.world) v.set(...a.world);
-      v.project(camera);
-      const hidden = v.z > 1 || v.z < -1;
-      const x = ((v.x + 1) / 2) * size.width, y = ((1 - v.y) / 2) * size.height;
-      a.el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%)`;
-      a.el.style.visibility = hidden ? 'hidden' : '';
+    const n = ++frame.current;
+    const measure = (a: Anchor): Size => {
+      // Sizes change only with text, hover or zoom detail; re-measure a few times a second.
+      if (!a.size || n - (a.sizedAt ?? 0) > 15) { a.size = { width: a.el.offsetWidth, height: a.el.offsetHeight }; a.sizedAt = n; }
+      return a.size;
+    };
+    const toScreen = (x: number, y: number, z: number) => {
+      v.set(x, y, z).project(camera);
+      return { x: ((v.x + 1) / 2) * size.width, y: ((1 - v.y) / 2) * size.height, visible: v.z <= 1 && v.z >= -1 };
+    };
+    const people: Box[] = [];
+    const zones: (ZoneLabelInput & { a: Anchor })[] = [];
+    for (const [key, a] of anchors) {
+      if (a.zone) { zones.push({ id: key, a, size: measure(a), candidates: a.zone.map(([x, y, z]) => toScreen(x, y, z)) }); continue; }
+      const b = a.staffId ? crowd.bodies.get(a.staffId) : undefined;
+      if (!b) continue;
+      const g = b.gesture ?? '';
+      if (a.el.dataset.gesture !== g) a.el.dataset.gesture = g;
+      if (a.el.dataset.detail !== detail) a.el.dataset.detail = detail;
+      const s = toScreen(b.x, (b.seated ? 2.0 : 2.3) * a.height, b.z);
+      const box = measure(a);
+      a.el.style.transform = `translate(${(s.x - box.width / 2).toFixed(1)}px, ${(s.y - box.height / 2).toFixed(1)}px)`;
+      a.el.style.visibility = s.visible ? '' : 'hidden';
+      if (s.visible) people.push({ left: s.x - box.width / 2, top: s.y - box.height / 2, width: box.width, height: box.height });
+    }
+    const placed = placeZoneLabels(zones, people, size);
+    for (const z of zones) {
+      const box = placed[z.id];
+      if (box) z.a.el.style.transform = `translate(${box.left.toFixed(1)}px, ${box.top.toFixed(1)}px)`;
+      z.a.el.style.visibility = box ? '' : 'hidden';
     }
   });
   return null;
@@ -135,10 +162,10 @@ function Labels(p: Office3DProps & { layout: Layout; anchors: Map<string, Anchor
     <div className="o3d-overlay">
       {!p.compact && ZONES.map((z) => {
         const dept = ZONE_DEPT[z.id] ?? z.id;
-        const [lx, lz] = toWorld({ x: z.rect.x, z: z.rect.z + z.rect.h - 1 }, p.layout);
+        const spots = zoneEdgeCandidates(z.rect).map((c) => { const [x, wz] = toWorld(c, p.layout); return [x, 0.05, wz] as [number, number, number]; });
         const name = p.labels.zones[z.id] ?? z.id;
         return (
-          <button key={z.id} ref={reg(`zone:${z.id}`, { world: [lx + 0.2, 0.05, lz + 0.2], height: 1 })} type="button"
+          <button key={z.id} ref={reg(`zone:${z.id}`, { zone: spots, height: 1 })} type="button"
             className={`o3d-anchor o3d-zone ${p.department === dept ? 'on' : ''}`} aria-pressed={p.department === dept}
             title={p.labels.zoneFilter(name)} onClick={() => p.onDepartment(p.department === dept ? null : dept)}>
             {name}

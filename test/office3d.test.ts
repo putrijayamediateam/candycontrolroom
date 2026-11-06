@@ -5,6 +5,7 @@ import { findPath } from '../web/src/office3d/pathfinding.js';
 import { deriveOffice, eventToActions, newEvents, maxSeq, type EventRecord, type MapContext, type StaffRecord, type TaskRecord } from '../web/src/office3d/mapping.js';
 import { appearanceFor } from '../web/src/office3d/appearance.js';
 import { Crowd } from '../web/src/office3d/crowd.js';
+import { overlaps, placeZoneLabels, zoneEdgeCandidates } from '../web/src/office3d/labels.js';
 
 const staff: StaffRecord[] = STAFF.map((s, i) => ({
   id: s.id, display_name: s.name, role_title: s.role, department: s.department, colour: s.colour,
@@ -216,5 +217,42 @@ describe('avatar briefs → respectful low-poly look', () => {
   it('gives the 21 staff distinct looks', () => {
     const looks = new Set(STAFF.map((s) => { const a = appearanceFor(s.id, s.colour, s.avatar); return `${a.skin}|${a.hairStyle}|${a.hijabColour}|${a.outfit}|${a.accent}`; }));
     expect(looks.size).toBe(21);
+  });
+});
+
+describe('zone label placement', () => {
+  const canvas = { width: 400, height: 300 };
+  const size = { width: 80, height: 18 };
+
+  it('keeps a zone label inside the canvas even when its anchor is off the edge', () => {
+    const out = placeZoneLabels([{ id: 'systems', size, candidates: [{ x: -30, y: 150 }] }], [], canvas);
+    expect(out.systems!.left).toBeGreaterThanOrEqual(0);
+    expect(out.systems!.left + size.width).toBeLessThanOrEqual(canvas.width);
+    const far = placeZoneLabels([{ id: 'z', size, candidates: [{ x: 450, y: 320 }] }], [], canvas).z!;
+    expect(far.left + far.width).toBeLessThanOrEqual(canvas.width);
+    expect(far.top + far.height).toBeLessThanOrEqual(canvas.height);
+  });
+
+  it('moves off a name tag to the next free edge spot, and never sits on one', () => {
+    const tag = { left: 100, top: 100, width: 70, height: 30 };
+    const out = placeZoneLabels([{ id: 'a', size, candidates: [{ x: 130, y: 112 }, { x: 300, y: 60 }] }], [tag], canvas);
+    expect(out.a!.left).toBe(260);
+    expect(overlaps(out.a!, tag)).toBe(false);
+  });
+
+  it('hides a zone label when every spot is covered, and zone labels do not overlap each other', () => {
+    const tag = { left: 100, top: 100, width: 70, height: 30 };
+    expect(placeZoneLabels([{ id: 'a', size, candidates: [{ x: 130, y: 112 }] }], [tag], canvas).a).toBeNull();
+    const two = placeZoneLabels([
+      { id: 'a', size, candidates: [{ x: 50, y: 50 }] },
+      { id: 'b', size, candidates: [{ x: 60, y: 55 }, { x: 250, y: 200 }] },
+    ], [], canvas);
+    expect(overlaps(two.a!, two.b!)).toBe(false);
+  });
+
+  it('offers spots on every edge of a zone', () => {
+    const c = zoneEdgeCandidates({ x: 1, z: 17, w: 5, h: 6 });
+    expect(c.length).toBeGreaterThanOrEqual(6);
+    expect(new Set(c.map((p) => `${p.x},${p.z}`)).size).toBe(c.length);
   });
 });
