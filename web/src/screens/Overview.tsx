@@ -5,7 +5,7 @@ import { useLive } from '../live';
 import { useSession } from '../session';
 import { fmtDateTime, myHour, shortTarget } from '../format';
 import { Async, Avatar, Badge, Card, Empty, EvidenceBadge, PageHeader, SideStateBadge } from '../ui';
-import { OfficePreview } from './office';
+import { OfficeCard } from './OfficeScreen';
 
 export function Overview() {
   const { t, i18n } = useTranslation();
@@ -110,8 +110,8 @@ export function Overview() {
                 ) : <Empty title={t('overview.noLiveActivity')}><a href="#/activity">{t('overview.openLog')}</a></Empty>}
               </Card>
 
-              <Card title={t('overview.office')} className="span-3" actions={<a href="#/team" className="small">{t('overview.openTeam')}</a>}>
-                <OfficePreview />
+              <Card title={t('overview.office')} className="span-3" actions={<span className="row gap"><a href="#/office" className="small">{t('overview.expandOffice')}</a> <a href="#/team" className="small">{t('overview.openTeam')}</a></span>}>
+                <OfficeCard />
               </Card>
             </div>
           );

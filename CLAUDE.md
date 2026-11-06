@@ -54,7 +54,7 @@ python3 assets/build.py               # regenerates posters (needs playwright + 
 
 ## Web app (web/)
 - React 19 + Vite 8 + i18next. `corepack pnpm build:web` → `web/dist`, served by the API at http://127.0.0.1:3100. Dev: `start:api` + `dev:web` (Vite on 5173 proxies /api).
-- Hash routes `#/overview`, `#/team/<staffId>`, `#/work/<taskId>`, `#/approvals`, `#/prs`, `#/calendar`, `#/assets`, `#/community`, `#/performance`, `#/integrations`, `#/activity`, `#/studio`, `#/settings`.
+- Hash routes `#/overview`, `#/office` (3D office, `#/office/<staffId>` selects someone), `#/team/<staffId>`, `#/work/<taskId>`, `#/approvals`, `#/prs`, `#/calendar`, `#/assets`, `#/community`, `#/performance`, `#/integrations`, `#/activity`, `#/studio`, `#/settings`.
 - All UI text lives in `web/src/locales/en.json` and `ms.json` (same keys — `test/web.test.ts` fails on any missing key, unlabelled event type, stage, template or policy error code). Use literal `t('a.b')` keys so the test can see them.
 - `useApi(path)` reloads on every live event (`LiveProvider`, EventSource with Last-Event-ID). Server-side policy errors map to `errors.<code>`.
 - Staff role titles and task titles are stored data and stay as written (not translated).

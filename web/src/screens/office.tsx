@@ -6,7 +6,7 @@ export const DEPARTMENTS = ['leadership', 'strategy_content', 'creative_producti
 
 /**
  * Accessible 2D office view, built only from stored staff/task state.
- * The 3D office (React Three Fiber) is the next milestone and will use the same data and events.
+ * Also the fallback when WebGL is unavailable, on phones, and when AIN chooses the 2D view.
  */
 export function OfficePreview({ department }: { department?: string }) {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ export function OfficePreview({ department }: { department?: string }) {
   const staff = st.data.staff.filter((s: any) => !department || s.department === department);
   return (
     <div>
-      <p className="muted small"><Badge tone="info">{t('office.twoD')}</Badge> {t('office.threeDPlanned')}</p>
+      <p className="muted small"><Badge tone="info">{t('office.twoD')}</Badge> {t('office.listNote')}</p>
       <div className="office-2d">
         {DEPARTMENTS.filter((d) => staff.some((s: any) => s.department === d)).map((d) => (
           <section key={d} className={`office-zone zone-${d}`} aria-label={t(`department.${d}`)}>

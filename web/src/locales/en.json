@@ -38,6 +38,7 @@
     "awaitingCount": "{{count}} waiting for you",
     "chat": "CANDY (head chat)",
     "overview": "Overview",
+    "office": "Office",
     "team": "Team and Training",
     "work": "Work Board",
     "approvals": "Approval Inbox",
@@ -147,11 +148,12 @@
     "noLiveActivity": "Nothing new since you opened the app.",
     "openLog": "Open the activity log",
     "office": "Office",
-    "openTeam": "Open Team and Training"
+    "openTeam": "Open Team and Training",
+    "expandOffice": "Expand office"
   },
   "office": {
     "twoD": "2D view",
-    "threeDPlanned": "The animated 3D office is the next milestone. This list shows the same saved staff state.",
+    "listNote": "This list shows the same saved staff state as the 3D office.",
     "waitingAin": "Waiting for AIN"
   },
   "team": {
@@ -727,5 +729,52 @@
     "file_type_mismatch": "The file's content does not match its name, so it was not saved.",
     "upload_failed": "The upload was interrupted. Nothing was saved; please try again.",
     "worker_disabled": "Staff chat answering is not set up on this server (WORKER_TOKEN missing)."
+  },
+  "office3d": {
+    "title": "Office",
+    "subtitle": "Your team in a live 3D office. Every pose comes from saved records and real events.",
+    "controls": "Office controls",
+    "viewLabel": "View",
+    "view3d": "3D office",
+    "view2d": "2D list",
+    "department": "Department",
+    "allDepartments": "All departments",
+    "departmentLabel": "Department",
+    "resetCamera": "Reset camera",
+    "pause": "Pause animation",
+    "resume": "Resume animation",
+    "reducedMotion": "Reduced motion",
+    "lowPower": "Low-performance mode",
+    "noWebgl": "This browser cannot show 3D graphics (WebGL is unavailable), so the office is shown as a list.",
+    "failed": "The 3D office could not start on this device, so the office is shown as a list.",
+    "phoneHint": "On phones the office opens as a list. Choose 3D office to try the 3D view.",
+    "loading": "Loading the 3D office…",
+    "honesty": "Staff stay idle unless a saved record or event says otherwise. Staff execution is not connected yet, so walking and gestures only follow real events such as chat replies, relays and reviews.",
+    "canvasLabel": "3D office. Use the name labels to select a person, or the department labels to filter.",
+    "zoneFilter": "Show only {{name}}",
+    "studio": "Creative studio",
+    "details": "Person details",
+    "selectHint": "Select a person to see their role, current task, status and tool evidence.",
+    "closeDetails": "Close person details",
+    "status": "Status",
+    "task": "Current task",
+    "noTask": "No open task",
+    "blocker": "Blocker",
+    "tools": "Tool evidence",
+    "noTools": "No tool activity recorded for this person.",
+    "openProfile": "Open profile and training",
+    "marker": {
+      "waiting": "Waiting",
+      "blocked": "Blocked",
+      "unread": "Unread reply"
+    },
+    "activity": {
+      "working": "Working",
+      "paused": "Paused"
+    },
+    "gesture": {
+      "talk": "Talking",
+      "complete": "Done"
+    }
   }
 }
