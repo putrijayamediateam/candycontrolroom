@@ -133,6 +133,9 @@ describe('staff, tasks and approvals over HTTP', () => {
     const csv = await api('GET', '/api/reviews/export?format=csv');
     expect(csv.headers['content-type']).toContain('text/csv');
     expect(csv.body.split('\n')[0]).toContain('ref');
+    // Malaysia business date stays exactly as stored (no UTC shift to the previous day)
+    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kuala_Lumpur' }).format(new Date());
+    expect(csv.body.split('\n')[1]).toContain(`,${today},`);
     const detail = (await api('GET', `/api/tasks/${taskId}`)).json;
     expect(detail.task.stage).toBe('approved');
     expect(detail.versions[0].missing_gates).toEqual([]);

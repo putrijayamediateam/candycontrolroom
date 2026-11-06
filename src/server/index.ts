@@ -22,6 +22,7 @@ const maxUploadMb = Number(process.env.UPLOAD_MAX_MB ?? 500);
 const app = await buildApp({
   db, hub, logger: true, webDir: 'web/dist', storageDir: process.env.STORAGE_DIR ?? 'storage',
   maxUploadBytes: maxUploadMb * 1024 * 1024, secureCookies: process.env.COOKIE_SECURE === 'true',
+  workerToken: process.env.WORKER_TOKEN || null,
 });
 console.log(`CANDY Control Room: http://${host === '0.0.0.0' ? 'localhost' : host}:${port}`);
 await app.listen({ port, host });

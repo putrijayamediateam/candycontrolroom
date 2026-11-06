@@ -1,4 +1,7 @@
 import { fileURLToPath } from 'node:url';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { importDecisionsDoc } from '../core/chat.js';
 import { hash } from '@node-rs/argon2';
 import { createPool, tx, type Db } from './pool.js';
 import { migrate } from './migrate.js';
@@ -20,6 +23,9 @@ export async function seedBase(db: Db) {
     for (const id of ['anthropic', 'google_drive', 'google_calendar', 'gbp', 'youtube', 'meta', 'tiktok', 'github', 'canva'])
       await c.query(`INSERT INTO connections (id) VALUES ($1) ON CONFLICT DO NOTHING`, [id]);
     await c.query(`INSERT INTO app_settings(key,value) VALUES ('mode','"connected"'),('publishing_paused','false') ON CONFLICT DO NOTHING`);
+    // AIN's existing decisions become the starting decisions log in CANDY's head chat (once).
+    const doc = join(dirname(fileURLToPath(import.meta.url)), '../../../docs/DECISIONS.md');
+    if (existsSync(doc)) await importDecisionsDoc(c, readFileSync(doc, 'utf8'));
   });
 }
 

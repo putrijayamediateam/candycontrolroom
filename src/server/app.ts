@@ -16,6 +16,7 @@ import { answerQuestion, briefStaff, currentInstructions, questionDigest } from 
 import { myDate } from '../shared/time.js';
 import { verify } from '@node-rs/argon2';
 import { registerUploadRoutes } from './uploads.js';
+import { registerChatRoutes, workerStatus } from './chatRoutes.js';
 
 declare module 'fastify' {
   interface FastifyRequest { user?: SessionUser; sessionToken?: string }
@@ -30,6 +31,8 @@ export interface AppOptions {
   /** Private storage for uploads (default ./storage). */
   storageDir?: string;
   maxUploadBytes?: number;
+  /** Token a Claude session uses to answer chats as staff (scoped to chat only). */
+  workerToken?: string | null;
   secureCookies?: boolean;
   logger?: boolean;
   /** Heartbeat interval for the event stream (ms). */
@@ -76,6 +79,8 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
   app.addHook('onRequest', async (req, reply) => {
     if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return;
     if (!req.url.startsWith('/api/')) return;
+    // Worker calls use a bearer token, not cookies, so they cannot be forged cross-site.
+    if (req.url.startsWith('/api/worker/')) return;
     if (req.headers['x-candy-request'] !== '1') {
       return reply.code(403).send({ error: 'csrf', message: 'Missing x-candy-request header' });
     }
@@ -84,7 +89,7 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
   // ---------- Authentication ----------
   app.addHook('preHandler', async (req, reply) => {
     const route = req.routeOptions.url ?? '';
-    if (!route.startsWith('/api/') || PUBLIC_ROUTES.has(route)) return;
+    if (!route.startsWith('/api/') || PUBLIC_ROUTES.has(route) || route.startsWith('/api/worker/')) return;
     const token = parseCookies(req.headers.cookie)[SESSION_COOKIE];
     const user = await userForToken(db, token);
     if (!user) return reply.code(401).send({ error: 'unauthenticated', message: 'Please sign in' });
@@ -172,6 +177,7 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
     ]);
     const d = deleg.rows[0] ?? null;
     const w = worker.rows[0];
+    const session = await workerStatus(db);
     return {
       my_date: today,
       now: new Date().toISOString(),
@@ -183,7 +189,10 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
       blocked_tasks: blocked.rows,
       publishing_paused: paused.rows[0]?.value === true,
       // Honest worker state: staff work only runs while a Claude session or scheduled task is picking up jobs.
-      staff_execution: { state: w.running > 0 ? 'active' : 'offline', running_jobs: w.running, last_heartbeat: w.last_heartbeat },
+      staff_execution: {
+        state: w.running > 0 || session.online ? 'active' : 'offline', running_jobs: w.running,
+        last_heartbeat: session.last_seen ?? w.last_heartbeat, claude_session_online: session.online,
+      },
       counters: await dailyCounters(db, today),
     };
   });
@@ -580,6 +589,9 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
     reply.header('x-content-type-options', 'nosniff');
     return reply.type(MIME[extname(full).toLowerCase()]).send(createReadStream(full));
   });
+
+  // ---------- Head chat, staff sub-chats, decisions log, worker access ----------
+  registerChatRoutes(app, { db, workerToken: opts.workerToken ?? null });
 
   // ---------- Staff training uploads (images, videos, zip) ----------
   registerUploadRoutes(app, { db, storageDir: opts.storageDir ?? resolve(process.cwd(), 'storage'), maxBytes: opts.maxUploadBytes ?? 500 * 1024 * 1024 });

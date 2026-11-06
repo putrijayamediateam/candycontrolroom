@@ -1,5 +1,9 @@
 import pg from 'pg';
 
+// Keep SQL `date` values (Malaysia business dates) as plain 'YYYY-MM-DD' strings.
+// Otherwise pg turns them into local-midnight Dates, which show as the previous day in UTC exports.
+pg.types.setTypeParser(1082, (v) => v);
+
 export type Db = pg.Pool;
 export type Tx = pg.PoolClient;
 

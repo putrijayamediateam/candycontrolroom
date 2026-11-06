@@ -31,7 +31,9 @@ Open: AIN to confirm prices/dates still current; Tabung Haji logo permission; co
 | 2D office view (accessible fallback) | Working (list built from stored staff state) |
 | 3D office | Planned (next milestone) |
 | Staff training uploads (image / video / zip, private storage/) | Working and verified (6 tests + browser check on a test copy) |
-| Deliverable asset uploads, Ask Question to staff, task blocker clearing | Planned |
+| CANDY head chat (main entry), 21 staff sub-chats, team monitor, decisions log, side panel with quick orders | Working and verified (9 tests + end-to-end browser check on a test copy) |
+| Answering chats as CANDY/staff from a Claude session (`pnpm worker`, scoped WORKER_TOKEN) | Working — runs only while a Claude session is open and asked to check messages |
+| Deliverable asset uploads, task blocker clearing | Planned |
 | Staff execution via Claude sessions | Planned |
 | Meta / TikTok / GBP publishing | Requires connection + platform app review |
 | Analytics | Requires connections |

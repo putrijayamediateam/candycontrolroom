@@ -22,6 +22,11 @@ import { Integrations } from './screens/Integrations';
 import { Activity } from './screens/Activity';
 import { DesignerStudio } from './screens/DesignerStudio';
 import { Settings } from './screens/Settings';
+import { Chat } from './screens/Chat';
+import { SidePanel } from './SidePanel';
+
+const PANEL_KEY = 'candy.sidePanel';
+const readPanel = () => { try { const v = localStorage.getItem(PANEL_KEY); return v === null ? window.innerWidth >= 1100 : v === 'open'; } catch { return true; } };
 
 // ---------- Hash routing: #/route/param ----------
 export function useRoute() {
@@ -32,11 +37,13 @@ export function useRoute() {
     window.addEventListener('hashchange', on);
     return () => window.removeEventListener('hashchange', on);
   }, []);
-  return { route: parts[0] ?? 'overview', param: parts[1] ? decodeURIComponent(parts[1]) : undefined };
+  // CANDY's head chat is the main entry point of the control room.
+  return { route: parts[0] ?? 'chat', param: parts[1] ? decodeURIComponent(parts[1]) : undefined };
 }
 export const go = (route: string, param?: string) => { window.location.hash = `#/${route}${param ? `/${encodeURIComponent(param)}` : ''}`; };
 
 const NAV = [
+  { id: 'chat', icon: '✦', C: Chat },
   { id: 'overview', icon: '◎', C: Overview },
   { id: 'team', icon: '☺', C: Team },
   { id: 'work', icon: '▤', C: WorkBoard },
@@ -108,6 +115,10 @@ function Shell() {
   const [panel, setPanel] = useState<null | 'button' | 'command_input'>(null);
   const [briefingId, setBriefingId] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [panelOpen, setPanelOpenState] = useState(readPanel);
+  const setPanelOpen = (open: boolean) => { setPanelOpenState(open); try { localStorage.setItem(PANEL_KEY, open ? 'open' : 'closed'); } catch { /* storage unavailable */ } };
+  const threads = useApi<any>('/api/chat/threads');
+  const unreadTotal = (threads.data?.threads ?? []).reduce((n: number, x: any) => n + x.unread, 0);
   const [now, setNow] = useState(new Date());
   useEffect(() => { const i = setInterval(() => setNow(new Date()), 15_000); return () => clearInterval(i); }, []);
   useEffect(() => { setMenuOpen(false); window.scrollTo(0, 0); }, [route]);
@@ -126,7 +137,7 @@ function Shell() {
   return (
     <DelegationContext.Provider value={ctx}>
       <a className="skip-link" href="#main">{t('common.skipToContent')}</a>
-      <div className={`shell ${menuOpen ? 'menu-open' : ''}`}>
+      <div className={`shell ${menuOpen ? 'menu-open' : ''} ${panelOpen ? 'panel-open' : ''}`}>
         <aside className="sidebar" aria-label={t('nav.label')}>
           <div className="brand">
             <img src="/logo.png" alt="" />
@@ -138,6 +149,7 @@ function Shell() {
                 <span className="nav-icon" aria-hidden="true">{n.icon}</span>
                 <span>{t(`nav.${n.id}`)}</span>
                 {n.id === 'approvals' && awaiting > 0 && <span className="count" aria-label={t('nav.awaitingCount', { count: awaiting })}>{awaiting}</span>}
+                {n.id === 'chat' && unreadTotal > 0 && <span className="count" aria-label={t('panel.unread', { count: unreadTotal })}>{unreadTotal}</span>}
               </a>
             ))}
           </nav>
@@ -158,6 +170,9 @@ function Shell() {
               ? <button className="btn btn-dark" onClick={() => void imDone()}>{t('delegation.imDone')}</button>
               : <button className="btn btn-primary" onClick={() => setPanel('button')}>{t('delegation.becomeMe')}</button>)}
             <span className={`live-dot live-${live.status}`} title={t(`live.${live.status}`)}><span aria-hidden="true">●</span> <span className="sr-only-sm">{t(`live.${live.status}`)}</span></span>
+            <button className="btn btn-ghost" onClick={() => setPanelOpen(!panelOpen)} aria-expanded={panelOpen} aria-controls="side-panel">
+              {panelOpen ? t('panel.hide') : t('panel.show')}{!panelOpen && unreadTotal > 0 ? ` (${unreadTotal})` : ''}
+            </button>
             <button className="btn btn-ghost" onClick={() => void signOut()} title={user.email}>{t('common.signOut')}</button>
           </header>
           <DelegationBanner active={active} onStop={() => void imDone()} />
@@ -165,6 +180,7 @@ function Shell() {
             <Screen param={param} />
           </main>
         </div>
+        {panelOpen && <div id="side-panel" className="side-panel-wrap"><SidePanel onClose={() => setPanelOpen(false)} /></div>}
       </div>
       <BecomeMePanel open={!!panel} source={panel ?? 'button'} onClose={() => setPanel(null)} onDone={() => { deleg.reload(); overview.reload(); }} />
       <BriefingModal delegationId={briefingId} onClose={() => { setBriefingId(null); deleg.reload(); }} />
