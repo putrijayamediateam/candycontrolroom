@@ -5,7 +5,7 @@ export const CORE_PLATFORMS = ['facebook', 'instagram', 'tiktok', 'threads'] as 
 /** Daily CPR/DPR list from stored records for a Malaysia date. */
 export async function dailyPrList(db: Db, day: string, kind?: 'CPR' | 'DPR') {
   const r = await db.query(
-    `SELECT rr.ref, rr.kind, rr.my_date, rr.status, rr.summary, rr.candy_review, rr.submitted_at, rr.repo_pr_url,
+    `SELECT rr.id, rr.task_id, rr.version_id, rr.ref, rr.kind, rr.my_date, rr.status, rr.summary, rr.candy_review, rr.submitted_at, rr.repo_pr_url,
             s.display_name AS submitted_by, t.title, t.ref AS task_ref, t.is_demo, v.version, v.platform,
             a.decision, a.decided_by_kind, a.reason AS decision_reason, a.created_at AS decided_at
        FROM review_requests rr

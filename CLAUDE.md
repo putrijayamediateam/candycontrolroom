@@ -26,7 +26,7 @@ pnpm install
 createdb candy && createdb candy_test
 export DATABASE_URL=postgres://postgres@localhost:5433/candy
 pnpm migrate && pnpm seed
-pnpm test        # 24 tests, uses candy_test via TEST_DATABASE_URL (see .env)
+pnpm test        # 46 tests (core + API/SSE), uses candy_test via TEST_DATABASE_URL (see .env)
 # AIN's Windows PC: Node 22 + PostgreSQL 16 (port 5433, service) installed via winget; pnpm via `corepack pnpm`.
 # Local DB password is in .local-pg-password; load .env into the shell before running scripts.
 npx tsx scripts/submit-posters.ts     # records the 8 posters as CPRs (creates AIN owner; password in .local-owner-password)
@@ -44,10 +44,17 @@ python3 assets/build.py               # regenerates posters (needs playwright + 
 - `assets/` — logo, QR, poster generator `build.py`, rendered posters.
 - `test/core.test.ts` — acceptance tests.
 
+## API (src/server/app.ts)
+- `pnpm start:api` (or `dev:api`) → http://127.0.0.1:3100, loads `.env`. `pnpm owner:reset` sets a new owner password into `.local-owner-password`.
+- Session cookie `candy_sid` (HttpOnly, SameSite=Strict); DB stores sha256(token). Every non-GET `/api/*` call must send header `x-candy-request: 1`.
+- Routes: auth/me/preferences/password, overview, staff (+brief, patch), tasks (+advance, versions), versions (translate, checks), reviews (daily, awaiting, export csv/json, decision), questions, delegation (activate/end/briefing/acknowledge), commands (BECOME ME / I'M DONE), publishing pause, counters, targets, connections, events (paged), `GET /api/events/stream` (SSE; `?after=` or Last-Event-ID replays with a 50-event overlap — clients de-dupe by `seq`), `/api/assets/*` (auth, assets/ only).
+- Live stream: trigger in migration 002 → `pg_notify('candy_events', seq)` → `EventHub` (src/server/events.ts). `auth.*` events are not streamed.
+- Staff/CANDY actions (submit, CANDY review) are not HTTP routes for humans; they will come from the staff-execution worker.
+
 ## Status (6 Nov 2026)
-Done and tested: Milestone 1 core (24 tests passing). First creative batch: CPR-20261106-001..008 awaiting AIN.
+Done and tested: Milestone 1 core + auth/REST/SSE (46 tests passing). First creative batch: CPR-20261106-001..008 awaiting AIN.
 Next, in order:
-1. Auth/session API (Argon2, DB sessions) + REST routes over the core + SSE event stream with replay.
+1. ~~Auth/session API + REST routes + SSE~~ done.
 2. React app: 13 screens (Overview, Team and Training, Work Board, Approval Inbox, Daily PRs, Calendar, Assets, Community, Performance, Integrations, Activity/Delegation Log, Designer Studio, Settings) with `en`/`ms` locale files and onboarding language step.
 3. 3D office (R3F) driven only by `events`, Designer Team wing, 2D fallback, reduced motion.
 4. Demo mode with labelled synthetic data.

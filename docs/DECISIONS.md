@@ -24,8 +24,9 @@ Open: AIN to confirm prices/dates still current; Tabung Haji logo permission; co
 | Area | Status |
 | --- | --- |
 | Core schema, gates, approvals, delegation, CPR/DPR, publishing safety, audit | Working and verified (24 tests) |
-| Poster generator + 8 posters | Working; awaiting AIN approval |
-| Auth/API/SSE | Planned |
+| Poster generator + 8 posters | Working; awaiting AIN approval (CPR-20261106-001..008 loaded in AIN's local DB) |
+| Auth (Argon2, hashed DB sessions, throttling, CSRF header), REST API, SSE stream with replay | Working and verified (22 API tests + local smoke test on AIN's PC, 6 Nov 2026) |
+| Local run on AIN's Windows PC (Node 22, PostgreSQL 16 service, port 5433) | Working |
 | Web UI (13 screens, en/ms) | Planned |
 | 3D office + 2D fallback | Planned |
 | Staff execution via Claude sessions | Planned |
