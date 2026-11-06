@@ -38,6 +38,7 @@
     "awaitingCount": "{{count}} menunggu anda",
     "chat": "CANDY (sembang ketua)",
     "overview": "Gambaran Keseluruhan",
+    "office": "Pejabat",
     "team": "Pasukan dan Latihan",
     "work": "Papan Kerja",
     "approvals": "Peti Kelulusan",
@@ -147,11 +148,12 @@
     "noLiveActivity": "Tiada yang baharu sejak anda membuka aplikasi.",
     "openLog": "Buka log aktiviti",
     "office": "Pejabat",
-    "openTeam": "Buka Pasukan dan Latihan"
+    "openTeam": "Buka Pasukan dan Latihan",
+    "expandOffice": "Besarkan pejabat"
   },
   "office": {
     "twoD": "Paparan 2D",
-    "threeDPlanned": "Pejabat 3D beranimasi ialah pencapaian seterusnya. Senarai ini menunjukkan keadaan staf yang sama daripada rekod.",
+    "listNote": "Senarai ini menunjukkan keadaan staf yang sama seperti pejabat 3D, daripada rekod.",
     "waitingAin": "Menunggu AIN"
   },
   "team": {
@@ -727,5 +729,52 @@
     "file_type_mismatch": "Kandungan fail tidak sepadan dengan namanya, jadi ia tidak disimpan.",
     "upload_failed": "Muat naik terganggu. Tiada apa yang disimpan; sila cuba lagi.",
     "worker_disabled": "Jawapan sembang staf belum disediakan pada pelayan ini (WORKER_TOKEN tiada)."
+  },
+  "office3d": {
+    "title": "Pejabat",
+    "subtitle": "Pasukan anda dalam pejabat 3D secara langsung. Setiap pergerakan datang daripada rekod dan peristiwa sebenar.",
+    "controls": "Kawalan pejabat",
+    "viewLabel": "Paparan",
+    "view3d": "Pejabat 3D",
+    "view2d": "Senarai 2D",
+    "department": "Jabatan",
+    "allDepartments": "Semua jabatan",
+    "departmentLabel": "Jabatan",
+    "resetCamera": "Set semula kamera",
+    "pause": "Jeda animasi",
+    "resume": "Sambung animasi",
+    "reducedMotion": "Kurangkan pergerakan",
+    "lowPower": "Mod prestasi rendah",
+    "noWebgl": "Pelayar ini tidak dapat memaparkan grafik 3D (WebGL tiada), jadi pejabat dipaparkan sebagai senarai.",
+    "failed": "Pejabat 3D tidak dapat dimulakan pada peranti ini, jadi pejabat dipaparkan sebagai senarai.",
+    "phoneHint": "Pada telefon, pejabat dibuka sebagai senarai. Pilih Pejabat 3D untuk mencuba paparan 3D.",
+    "loading": "Memuatkan pejabat 3D…",
+    "honesty": "Staf kekal melahu melainkan rekod atau peristiwa yang disimpan menyatakan sebaliknya. Pelaksanaan staf belum disambungkan, jadi berjalan dan gerak isyarat hanya mengikut peristiwa sebenar seperti balasan sembang, penyampaian arahan dan semakan.",
+    "canvasLabel": "Pejabat 3D. Gunakan label nama untuk memilih seseorang, atau label jabatan untuk menapis.",
+    "zoneFilter": "Tunjukkan {{name}} sahaja",
+    "studio": "Studio kreatif",
+    "details": "Butiran staf",
+    "selectHint": "Pilih seseorang untuk melihat peranan, tugasan semasa, status dan bukti alat mereka.",
+    "closeDetails": "Tutup butiran staf",
+    "status": "Status",
+    "task": "Tugasan semasa",
+    "noTask": "Tiada tugasan terbuka",
+    "blocker": "Halangan",
+    "tools": "Bukti alat",
+    "noTools": "Tiada aktiviti alat direkodkan untuk staf ini.",
+    "openProfile": "Buka profil dan latihan",
+    "marker": {
+      "waiting": "Menunggu",
+      "blocked": "Tersekat",
+      "unread": "Balasan belum dibaca"
+    },
+    "activity": {
+      "working": "Sedang bekerja",
+      "paused": "Dijeda"
+    },
+    "gesture": {
+      "talk": "Bercakap",
+      "complete": "Selesai"
+    }
   }
 }

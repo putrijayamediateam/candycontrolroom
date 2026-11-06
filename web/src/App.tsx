@@ -10,6 +10,7 @@ import { BecomeMePanel, BriefingModal, DelegationBanner } from './delegation';
 import { fmtLongDate, fmtTime } from './format';
 import { Badge, ErrorNote, Loading } from './ui';
 import { Overview } from './screens/Overview';
+import { Office } from './screens/OfficeScreen';
 import { Team } from './screens/Team';
 import { WorkBoard } from './screens/WorkBoard';
 import { ApprovalInbox } from './screens/ApprovalInbox';
@@ -45,6 +46,7 @@ export const go = (route: string, param?: string) => { window.location.hash = `#
 const NAV = [
   { id: 'chat', icon: '✦', C: Chat },
   { id: 'overview', icon: '◎', C: Overview },
+  { id: 'office', icon: '⌂', C: Office },
   { id: 'team', icon: '☺', C: Team },
   { id: 'work', icon: '▤', C: WorkBoard },
   { id: 'approvals', icon: '✓', C: ApprovalInbox },

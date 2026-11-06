@@ -29,7 +29,7 @@ Open: AIN to confirm prices/dates still current; Tabung Haji logo permission; co
 | Local run on AIN's Windows PC (Node 22, PostgreSQL 16 service, port 5433) | Working |
 | Web UI: 13 screens, sign-in, first-run language step, BECOME ME panel / I'M DONE briefing, live updates, en + ms | Working and verified (8 locale/serving tests; browser walkthrough on a test copy, desktop + phone width) |
 | 2D office view (accessible fallback) | Working (list built from stored staff state) |
-| 3D office | Planned (next milestone) |
+| 3D office | Built on branch `claude/designer-team-a9dd45` (R3F, lazy chunk, 2D fallback, unit-tested mapping and pathfinding); waiting for CANDY release review and AIN release approval |
 | Staff training uploads (image / video / zip, private storage/) | Working and verified (6 tests + browser check on a test copy) |
 | CANDY head chat (main entry), 21 staff sub-chats, team monitor, decisions log, side panel with quick orders | Working and verified (9 tests + end-to-end browser check on a test copy) |
 | Answering chats as CANDY/staff from a Claude session (`pnpm worker`, scoped WORKER_TOKEN) | Working — runs only while a Claude session is open and asked to check messages |
