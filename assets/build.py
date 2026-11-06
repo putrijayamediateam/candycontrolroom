@@ -4,8 +4,8 @@ Palette (approved by AIN): #fddbec #fdcae3 #f9a6d0 #ffffff #000000. Logo kept as
 import base64, pathlib, sys
 from playwright.sync_api import sync_playwright
 
-ROOT = pathlib.Path(__file__).parent
-OUT = pathlib.Path('/mnt/user-data/outputs/posters'); OUT.mkdir(parents=True, exist_ok=True)
+ROOT = pathlib.Path(__file__).parent.parent / 'posters-src' if (pathlib.Path(__file__).parent.parent / 'posters-src').exists() else pathlib.Path(__file__).parent
+OUT = pathlib.Path(__import__('os').environ.get('POSTER_OUT', 'out/posters')); OUT.mkdir(parents=True, exist_ok=True)
 def b64(p): return 'data:image/png;base64,' + base64.b64encode((ROOT / p).read_bytes()).decode()
 LOGO, QR = b64('assets/logo.png'), b64('assets/qr.png')
 
