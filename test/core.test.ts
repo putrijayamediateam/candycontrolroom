@@ -10,7 +10,7 @@ import { briefStaff, currentInstructions, askQuestion, questionDigest, answerQue
 import { myDate, slotInstant } from '../src/shared/time.js';
 import { OPERATIONAL_IDS, DESIGNER_IDS } from '../src/shared/staff.js';
 
-const URL = 'postgres://postgres@localhost:5433/candy_test?host=/tmp';
+const URL = process.env.TEST_DATABASE_URL ?? 'postgres://postgres@localhost:5433/candy_test';
 let db: Db; let ain: string; let doctor: string;
 const H = () => ({ kind: 'human' as const, userId: ain });
 

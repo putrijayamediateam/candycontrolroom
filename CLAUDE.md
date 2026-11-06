@@ -26,7 +26,9 @@ pnpm install
 createdb candy && createdb candy_test
 export DATABASE_URL=postgres://postgres@localhost:5433/candy
 pnpm migrate && pnpm seed
-pnpm test        # 24 tests, uses candy_test (see test/core.test.ts URL)
+pnpm test        # 24 tests, uses candy_test via TEST_DATABASE_URL (see .env)
+# AIN's Windows PC: Node 22 + PostgreSQL 16 (port 5433, service) installed via winget; pnpm via `corepack pnpm`.
+# Local DB password is in .local-pg-password; load .env into the shell before running scripts.
 npx tsx scripts/submit-posters.ts     # records the 8 posters as CPRs (creates AIN owner; password in .local-owner-password)
 npx tsx scripts/export-daily.ts 2026-11-06
 python3 assets/build.py               # regenerates posters (needs playwright + fonts from npm @fontsource)
