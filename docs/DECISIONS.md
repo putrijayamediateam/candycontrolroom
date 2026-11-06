@@ -30,7 +30,8 @@ Open: AIN to confirm prices/dates still current; Tabung Haji logo permission; co
 | Web UI: 13 screens, sign-in, first-run language step, BECOME ME panel / I'M DONE briefing, live updates, en + ms | Working and verified (8 locale/serving tests; browser walkthrough on a test copy, desktop + phone width) |
 | 2D office view (accessible fallback) | Working (list built from stored staff state) |
 | 3D office | Planned (next milestone) |
-| Asset uploads, Ask Question to staff, task blocker clearing | Planned |
+| Staff training uploads (image / video / zip, private storage/) | Working and verified (6 tests + browser check on a test copy) |
+| Deliverable asset uploads, Ask Question to staff, task blocker clearing | Planned |
 | Staff execution via Claude sessions | Planned |
 | Meta / TikTok / GBP publishing | Requires connection + platform app review |
 | Analytics | Requires connections |
