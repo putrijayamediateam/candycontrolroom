@@ -121,17 +121,17 @@ describe('workflow gates (checks 3, 4, 5)', () => {
 
 describe('daily PR list (check 6)', () => {
   it('IDs are sequential per Malaysia date and lists come from stored records', async () => {
-    // 23:30 UTC on 6 Nov is 07:30 on 7 Nov in Malaysia
-    const late = new Date('2026-11-06T23:30:00Z');
+    // 23:30 UTC on 14 Mar 2030 is 07:30 on 15 Mar in Malaysia (a date no other test uses, so it never collides with "today")
+    const late = new Date('2030-03-14T23:30:00Z');
     const t = await tx(db, (c) => createTask(c, H(), { template: 'text_psa', title: 'Threads PSA' }));
     const v = await tx(db, (c) => createVersion(c, H(), { taskId: t.id, platform: 'threads', copy: 'PSA' }));
     const a = await tx(db, (c) => submitForReview(c, 'iman', v.id, 'PSA v1', late));
     const b = await tx(db, (c) => submitForReview(c, 'iman', v.id, 'PSA v1 again', late));
-    expect(a.ref).toBe('CPR-20261107-001'); expect(b.ref).toBe('CPR-20261107-002');
-    const list = await dailyPrList(db, '2026-11-07', 'CPR');
-    expect(list.map((x) => x.ref)).toEqual(['CPR-20261107-001', 'CPR-20261107-002']);
+    expect(a.ref).toBe('CPR-20300315-001'); expect(b.ref).toBe('CPR-20300315-002');
+    const list = await dailyPrList(db, '2030-03-15', 'CPR');
+    expect(list.map((x) => x.ref)).toEqual(['CPR-20300315-001', 'CPR-20300315-002']);
     expect(toCsv(list).split('\n')[0]).toContain('ref');
-    expect(await dailyPrList(db, '2026-11-08')).toEqual([]);
+    expect(await dailyPrList(db, '2030-03-16')).toEqual([]);
   });
 });
 
