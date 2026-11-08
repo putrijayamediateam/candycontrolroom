@@ -191,3 +191,140 @@ Nothing failed, so there are no required fixes. Optional, only if there's time t
 |---|---|
 | nov-deepavali-en | Passed on all 7 checks (QR smaller than usual) |
 | nov-deepavali-ms | Passed on all 7 checks (QR smaller than usual) |
+
+---
+
+# Prediabetes video (Arjun)
+
+QA by **Nadia**, 8 Nov 2026, before CANDY's review. QA only; not an approval.
+
+Files:
+- `assets/video/prediabetes-en.mp4`
+- `assets/video/prediabetes-en-captions-only.mp4`
+- `assets/video/prediabetes-en-cover.png`
+
+Checked against:
+- the "Prediabetes video (40–50s)" script in `content/2026-11/november-brief.md`
+- `posters-src/video-prediabetes/captions.vtt` and `audio/beats.txt`
+- the CDC page "Prediabetes: Your Chance to Prevent Type 2 Diabetes" (https://www.cdc.gov/diabetes/prevention-type-2/prediabetes-prevent-type-2.html), which I fetched myself on 8 Nov 2026 to compare quotes
+
+## How I checked
+- **Streams (ffprobe):**
+  - Main file: H.264 1080×1920 at 30 fps, plus AAC 48 kHz mono audio, 48.13 s.
+  - Captions-only file: H.264 1080×1920, 48.13 s, **video stream only**.
+  - Cover: 1080×1920 PNG.
+- **Frames:** I pulled 16 frames with ffmpeg: 0.2 s, one per caption cue, and the end card at 43.7, 46.2 and 47.9 s. I drew red guide lines at y = 220 and y = 1540, the edges of the top 220 px and bottom 380 px platform-UI zones, and read every frame. I also looked at the captions-only file at 20 s and at the cover.
+- **Audio:** I can't listen, so I measured it.
+  - ffmpeg `silencedetect` (−35 dB, 0.15 s minimum) finds 18 speech segments between 0.54 s and 46.80 s. Mean level is −20.4 dB, peak −2.5 dB.
+  - I compared each segment with the cue times in `captions.vtt`. All 18 fall inside a cue, and no speech falls outside the cues. Each cue starts within 0.05 s of its speech, except cues that follow straight after the previous cue (for example cue 9, which shows during the half-second pause after "The good news?").
+  - The pause between beats is about 1 s.
+- **QR:** I read the end-card QR's module grid (41×41 modules, 8.2 px each, at x 372–707, y 865–1200) and compared it with `assets/qr.png`: **1512 of 1512 modules match** outside the centre logo, on frames at 46.2 and 47.9 s. The QR appears at about 42.1–42.3 s and stays to the end, so it's on screen for roughly 5.8 s.
+- **Logo:** the pink logo's aspect ratio is within 1% of `assets/logo.png` (3.5159) on the top logo (−0.78%), the end-card logo (+0.99%) and the cover logo (−0.45%). At these small sizes that's pixel rounding and compression, so it isn't distorted.
+
+## prediabetes-en.mp4 (voice + captions)
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Mascot lines and on-screen text match the script word for word, in order | passed | The 14 caption cues together match beats 1–8 of the script word for word (each beat is split over 1–2 cues; "high…" keeps its ellipsis). The on-screen pills follow the script in order: "High sugar, no signs?" → "What is prediabetes?" → "Often no symptoms" → "Know your risk" → "Healthy changes help" → "Move 150 min a week" → "One simple test" → end card "Get your blood sugar checked at Klinik Putrijaya" + "Scan for our branches" |
+| 2 | Every health line matches the CDC source; "Source: US CDC" visible; no prices, promises or patient stories | **failed (2 wording lines)** | Matches CDC: "higher than normal, but not yet type 2 diabetes" (CDC definition), "for years, with no clear symptoms", "overweight, 45 or older", "cut your risk of type 2 diabetes in half", "5 to 7 percent of your weight", "a simple blood sugar test". **Doesn't match:** (a) cue 7 "or have family with type 2 diabetes" is broader than CDC's "having a parent, brother, or sister with type 2 diabetes"; (b) cue 10 "Try **about** 150 minutes of brisk walking a week" softens CDC's "**at least** 150 minutes a week". Both lines are word for word from the suggested script, so this is a script issue, not a production error. "Source: US CDC" is visible on every frame and on the end card. No prices, promised results or patient stories |
+| 3 | "Klinik Putrijaya" spelling, logo, palette | passed | Spelled exactly in the logo, caption 13 and the end card. Logo within 1% (see method). Backgrounds and mascot use the palette pinks with black text and white caption boxes; the logo's hot pink is as supplied. Exact hex values can't be measured in compressed video, so I judged this on screen |
+| 4 | Nothing cut off; key text outside the top ~220 px and bottom ~380 px; captions readable | **failed** | Nothing is cut off, and the 3-line captions fit inside their box (I checked a clean crop at 9.8 s). But **the captions sit in the bottom UI zone**: the caption box runs from about y 1500–1535 to y 1715–1745, almost all below y 1540, where Instagram/TikTok put the caption, username and buttons. "Source: US CDC" at about y 1840 is also in that zone. The logo pill at about y 70–200 is in the top 220 px zone. The on-screen pills (y 300–410), the mascot and the end-card QR/CTA (card y 200–1440) are in the safe area. Captions are large (about 50 px type) and readable |
+| 5 | End card: CTA, QR and "Scan for our branches" | passed | CTA "Get your blood sugar checked at Klinik Putrijaya", "Scan for our branches", QR matches 1512/1512 modules, "Source: US CDC". On screen from about 42.2 s to 48.1 s |
+| 6 | 40–50 s; caption timing matches the voice beats | passed (timing) / **not verified** (spoken words) | 48.13 s. Timing matches (see method). Whether the voice says exactly the caption words, and how it sounds, needs listening: **not verified**. The VTT header says the voice is Microsoft Zira (a synthetic text-to-speech voice) |
+| 7 | Mascot original and respectful | passed, with a note | A simple pink blood-drop character with a nurse cap, a pink cross, a smile and waving arms, built from `posters-src/video-prediabetes/mascot.svg`. I didn't recognise it as any known brand character, but I can't search every existing mascot. Friendly and respectful. **Note:** the nurse cap makes the mascot look like clinical staff, and there's no clinician on staff. The lines are sourced to CDC and don't claim a clinician's advice, so I've left this to AIN |
+
+## prediabetes-en-captions-only.mp4
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1–5, 7 | Same visuals as the main file | same results as above (2 and 4 **failed**) | The frame at 20 s shows the same layout, pill "Know your risk" and cue 6 caption as the main file |
+| 6 | Duration; no audio stream | passed | 48.13 s; ffprobe lists only stream 0 (h264 video), no audio stream |
+
+## prediabetes-en-cover.png
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Text matches | passed | Pill "High sugar, no signs?" and caption "Did you know your blood sugar can be high…", both from beat 1 |
+| 2 | Source, no claims | passed | "Source: US CDC". No prices or promises |
+| 3 | Spelling, logo, palette | passed | Logo within 0.45%; palette pinks, black text |
+| 4 | Safe zones | **failed** | Same layout as the video: caption box at y 1535–1715 and source at about y 1840 are in the bottom zone; logo at y 75–195 is in the top zone. In a 4:5 grid crop (y 285–1635) the caption box gets cut through the middle |
+| 5 | QR | n/a | The cover has no QR, and the brief doesn't ask for one |
+| 7 | Mascot | passed | As above |
+
+## Fixes for Arjun
+1. **Safe zones (video, captions-only video and cover):**
+   - Move the caption box up so its bottom edge is at or above y 1540. For example, place it at about y 1330–1520 and make the mascot a little smaller or raise it.
+   - Move "Source: US CDC" above y 1540 too, for example just under the caption box or under the top pill.
+   - Move the logo pill down so its top is below y 220, for example y 230–350, and shift the top text pill down to match.
+2. **Health wording (needs Iman and AIN first, because it changes the suggested script):**
+   - Cue 7 / beat 4: "or have family with type 2 diabetes" → "or have a parent, brother or sister with type 2 diabetes".
+   - Cue 10 / beat 6: "Try about 150 minutes of brisk walking a week." → "Try at least 150 minutes of brisk walking a week."
+   - Then re-voice beats 4 and 6, update `captions.vtt` and the matching on-screen text, and re-render both videos.
+   - If AIN accepts the current wording instead, only fix 1 is needed.
+3. After the re-render, ask me to re-check the timing and safe zones. Someone should also listen to the voice once, because I can't verify the audio by ear.
+
+## Verdict
+| File | Verdict |
+|---|---|
+| prediabetes-en.mp4 | **Failed** on check 4 (captions, source line and logo in the platform-UI zones) and check 2 (two lines softer or broader than CDC). Checks 1, 3, 5 and 7 passed; check 6 passed on timing and duration, spoken words not verified |
+| prediabetes-en-captions-only.mp4 | **Failed** on checks 2 and 4 (same visuals). No audio stream, as required |
+| prediabetes-en-cover.png | **Failed** on check 4 (safe zones). Text, source, spelling, logo and mascot passed |
+
+---
+
+# Prediabetes video — re-check (Arjun's re-export)
+
+Re-check by **Nadia**, 8 Nov 2026, of the re-exported files at the same paths (MP4s 16:33–16:34, cover 16:34), with the same method as the first QA. QA only; not an approval.
+Checked against:
+- the updated `captions.vtt`
+- the brief's script with the CANDY correction note (beats 4 and 6)
+- the CDC page I fetched earlier today
+
+## How I checked
+- **Streams:** both MP4s are 49.77 s, H.264 1080×1920 at 30 fps. The main file has AAC 48 kHz mono audio (mean −20.4 dB, peak −2.1 dB). The captions-only file has **no audio stream**. ffmpeg `psnr` between the two videos is **infinite** on every frame, so the pictures are pixel-identical and the only difference is the audio.
+- **Frames:** 16 frames: 0.2 s, one per caption cue (1.8, 3.8, 6.0, 9.8, 14.4, 18.4, 22.7, 25.8, 28.8, 33.5, 37.7, 41.7, 45.4 s) and the end card at 47.9 and 49.6 s. I drew red guide lines at y 220 and y 1540 and read every frame. I also checked the cover, and its 4:5 grid crop (y 285–1635).
+- **Edges, measured on the clean frames:**
+  - The topmost logo or black pixel is at **y 258** (y 262 on the end card).
+  - The lowest black pixel is at **y 1518** on every frame and the cover. That is the bottom of "Source: US CDC"; the caption boxes end higher, at about y 1475.
+  - The end-card mascot ends at about y 1470.
+  - The only things outside y 220–1540 are the moving background words and the thin border of the end-card panel at about y 200, which are decoration.
+- **Audio vs captions:** `silencedetect` (−35 dB, 0.15 s) finds 20 speech segments between 0.54 s and 48.41 s.
+  - All 20 fall inside a cue of the new `captions.vtt`, and no speech falls outside the cues.
+  - Cue 7 (20.506–24.896 s) contains three speech segments, 20.73–24.61 s, for the longer "parent, brother or sister" line.
+  - Cue 10 (31.336–35.636 s) contains speech 31.38–35.15 s.
+  - Each cue starts within 0.05 s of its speech, except cues that follow straight after the previous cue.
+- **QR:** the end-card QR's module grid (41×41 modules, 7.0 px each, at x 396–683, y 790–1077) matches `assets/qr.png` on **1512 of 1512** modules outside the centre logo, at 45.4, 47.9 and 49.6 s. It appears at about 43.8–44.0 s, so it's on screen for about the last 5.8–6 s.
+- **Logo:** aspect ratio vs `assets/logo.png`: top logo −0.83%, end-card logo +1.13%, cover logo −0.45%. That's pixel rounding at these sizes, so it isn't distorted.
+
+## prediabetes-en.mp4
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 2 | Health lines match CDC; "Source: US CDC"; no prices, promises or stories | **passed** | Cue 7 now reads "or have a parent, brother or sister with type 2 diabetes.", matching CDC's "Having a parent, brother, or sister with type 2 diabetes". Cue 10 now reads "Try at least 150 minutes of brisk walking a week.", matching CDC's "at least 150 minutes a week of brisk walking". The other health lines are unchanged and match CDC (see first QA). "Source: US CDC" is visible on every frame and the end card. No prices, promises or patient stories |
+| 4 | Key text between y 220 and y 1540; nothing cut off; captions readable | **passed** | Measured: topmost key pixel y 258, lowest y 1518, on all 16 frames. Logo pill, top text pill (about y 390–500), mascot, caption box (about y 1240–1475), source line (about y 1500–1518) and end card are all inside the safe area. Nothing is clipped; 3-line captions fit their box. Captions are large and readable |
+| 6 | 40–50 s; caption timing matches the voice beats | **passed** (duration and timing) / **not verified** (spoken words) | 49.77 s. 20 of 20 speech segments fall inside their cues (see method). Whether the voice says exactly the new caption words, and how it sounds, is **not verified**; AIN will listen |
+| 1 | Spot-check: text matches script, in order | passed | All 14 cues match the corrected script, word for word and in order. The on-screen pills are unchanged and in order ("High sugar, no signs?" → … → "One simple test"). The end card reads "Get your blood sugar checked at Klinik Putrijaya" + "Scan for our branches" |
+| 3 | Spot-check: spelling, logo, palette | passed | Spelled exactly; logo within about 1%; same palette pinks with black text |
+| 5 | Spot-check: end card | passed | CTA, "Scan for our branches", QR 1512/1512 modules, "Source: US CDC". About 6 s on screen |
+| 7 | Spot-check: mascot | passed, with the same note | Same mascot, slightly smaller. The note about the nurse cap reading as clinical staff still stands for AIN |
+
+## prediabetes-en-captions-only.mp4
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1–5, 7 | Same visuals | passed (same as main file) | Video pixel-identical to the main file (PSNR infinite on every frame); cue 7 crop at 22.7 s identical |
+| 6 | Duration; no audio stream | passed | 49.77 s; ffprobe lists only stream 0 (h264) |
+
+## prediabetes-en-cover.png
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Text | passed | "High sugar, no signs?" + "Did you know your blood sugar can be high…" |
+| 2 | Source, no claims | passed | "Source: US CDC" |
+| 3 | Spelling, logo, palette | passed | Logo −0.45% |
+| 4 | Safe zones, including the 4:5 crop | **passed, with a note** | In the 9:16 cover, key content spans y 258–1518. In the 4:5 grid crop (y 285–1635), the top pill, mascot, caption and source line are all whole. The logo pill (about y 236–356) is cut at the top edge of the crop, so only its lower half shows in a 4:5 grid tile. The full logo shows when the cover opens. This is cosmetic, not a failure |
+| 7 | Mascot | passed | As above |
+
+## Fixes for Arjun
+None required. Optional: if AIN wants the full logo visible in the 4:5 profile-grid tile, move the cover's logo pill down to about y 300 or lower. That affects the cover only.
+
+## Verdict
+| File | Verdict |
+|---|---|
+| prediabetes-en.mp4 | **Passed** on checks 1–5 and 7, and on check 6 for duration and timing. Spoken words not verified (AIN will listen) |
+| prediabetes-en-captions-only.mp4 | **Passed** on all checks; no audio stream, as required |
+| prediabetes-en-cover.png | **Passed** (the logo is cut in the 4:5 grid crop; optional fix) |

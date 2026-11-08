@@ -25,6 +25,48 @@ Requested by AIN on 8 Nov. No health claims, no religious detail, no opening or 
 
 ---
 
+## Prediabetes video (40–50s) (Sara + Iman)
+
+Ordered by AIN on 8 Nov 2026: a short educational video with a talking mascot and moving background text. Status: **suggested script**. Nothing has been produced, approved or published.
+
+### Facts (Sara) — all from one official page I opened
+
+Source **[CDC]**: US Centers for Disease Control and Prevention, "Prediabetes: Your Chance to Prevent Type 2 Diabetes", https://www.cdc.gov/diabetes/prevention-type-2/prediabetes-prevent-type-2.html (checked 8 Nov 2026). I couldn't find a plain-language prediabetes page from WHO, KKM or MyHealth. Search turned up only news articles and an IMR research paper, so I used CDC as AIN allowed.
+
+1. What it is: "With prediabetes, blood sugar levels are higher than normal but not high enough for a type 2 diabetes diagnosis."
+2. No symptoms: "You can have prediabetes for years but have no clear symptoms."
+3. Who is at higher risk: being overweight, being 45 or older, having a parent, brother or sister with type 2 diabetes, and being physically active fewer than 3 times a week.
+4. Lifestyle helps: "Making lifestyle changes can cut your risk of type 2 diabetes in half." A small amount of weight loss means "around 5% to 7% of your body weight". Regular activity means "at least 150 minutes a week of brisk walking or a similar activity."
+5. Testing: "You can get a simple blood sugar test to find out if you have prediabetes."
+
+Not used:
+- US prevalence figures ("more than 2 in 5 American adults"), because they're not about Malaysia.
+- Malaysian prevalence figures (e.g. IMR's 22.1%, or "nearly 5 million" from RTM), because I didn't open those official sources.
+- The word "reverse". The CDC page I opened says lifestyle changes cut the *risk* of type 2 diabetes; it doesn't say prediabetes is reversed.
+
+### Script (Iman) — original Klinik Putrijaya mascot, to camera, ~113 words (about 45 s)
+
+| Beat | Mascot says | Moving text on screen | Source |
+|---|---|---|---|
+| 1 (hook) | Did you know your blood sugar can be high… without you feeling it? | High sugar, no signs? | CDC fact 2 |
+| 2 | That's called prediabetes. Your blood sugar is higher than normal, but not yet type 2 diabetes. | What is prediabetes? | CDC fact 1 |
+| 3 | You can have it for years, with no clear symptoms. | Often no symptoms | CDC fact 2 |
+| 4 | Your risk is higher if you're overweight, 45 or older, or have a parent, brother or sister with type 2 diabetes. | Know your risk | CDC fact 3 |
+| 5 | The good news? Healthy changes can cut your risk of type 2 diabetes in half. | Healthy changes help | CDC fact 4 |
+| 6 | Try at least 150 minutes of brisk walking a week. Losing just 5 to 7 percent of your weight helps too. | Move 150 min a week | CDC fact 4 |
+| 7 | And a simple blood sugar test can tell you where you stand. | One simple test | CDC fact 5 |
+| 8 (CTA) | Get your blood sugar checked at Klinik Putrijaya. See you soon! | Get your blood sugar checked at Klinik Putrijaya · Scan for our branches + QR | AIN-confirmed service (most branches); QR from DECISIONS.md |
+
+Notes for production: show the QR (https://linktr.ee/qr/3cb0d33d-ae3d-4a69-bce6-aff77224d944) for the last ~5 s. Add a small on-screen credit: "Source: US CDC". No prices, no promised results, no patient stories. The mascot design is for Creative Production to propose; it's not specified here.
+
+**CANDY correction (8 Nov, after Nadia's QA):** beats 4 and 6 now match CDC exactly ("a parent, brother or sister", "at least 150 minutes").
+
+### Caption (Facebook / Instagram / TikTok)
+
+Your blood sugar can be high without you feeling it. 🩸 That's prediabetes: higher than normal, but not yet type 2 diabetes, and it often has no clear symptoms. Healthy eating, regular activity and a little weight loss can cut your risk of type 2 diabetes in half (US CDC). Get your blood sugar checked at Klinik Putrijaya. Scan the QR or tap the link in bio to find your nearest branch. #Prediabetes #KnowYourSugar #KlinikPutrijaya
+
+---
+
 ## 1. Dates & sources (Sara)
 
 All checked on **8 Nov 2026** by web search and, where noted, by opening the official page. "Official" means set by WHO/the World Health Assembly, a UN body, or the Malaysian government. "Organiser-led" means a recognised campaign without a UN/WHO resolution.

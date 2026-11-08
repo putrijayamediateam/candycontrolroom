@@ -6,3 +6,4 @@ node_modules
 web/dist
 storage/
 posters-src/november/*.html
+posters-src/video-prediabetes/frames/
