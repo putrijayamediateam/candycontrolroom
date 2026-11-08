@@ -328,3 +328,150 @@ None required. Optional: if AIN wants the full logo visible in the 4:5 profile-g
 | prediabetes-en.mp4 | **Passed** on checks 1–5 and 7, and on check 6 for duration and timing. Spoken words not verified (AIN will listen) |
 | prediabetes-en-captions-only.mp4 | **Passed** on all checks; no audio stream, as required |
 | prediabetes-en-cover.png | **Passed** (the logo is cut in the 4:5 grid crop; optional fix) |
+
+---
+
+# November posters v2 (Mei)
+
+QA by **Nadia**, 8 Nov 2026, before CANDY's review. QA only; not an approval.
+Files: `assets/posters/nov-{diabetes,prematurity,cervical,childrens-day}-{en,ms}-v2.png`, all 2160×2700, timestamped 8 Nov 16:40. The originals without -v2 (already in AIN's inbox) were not re-checked.
+Checked against:
+- section 3 of `content/2026-11/november-brief.md`, with the updated CTAs for posters 1–3 and poster 4 unchanged
+- the "Hari Bayi Pramatang Sedunia" recommendation in the brief
+- `docs/DECISIONS.md`
+
+## How I checked
+- **Text, dates, footer and layout:** I opened all 8 PNGs and read them on screen.
+- **Pixels (same Node PNG reader as before):**
+  - **QR:** the 223×223 px QR at x 1776, y 2335 is identical in black and white to the earlier posters (influenza-en, which is built from `assets/qr.png`): **0.00%** of 40,000 sample points differ on all 8. That's the same QR AIN verified by phone on 8 Nov (per CANDY).
+  - **Logo:** bounding box 807–1352 × 112–266 px on all 8, aspect ratio +0.19% vs `assets/logo.png`. Not distorted.
+  - **Palette:** the colours covering more than 0.3% of each poster are only #ffffff, #fddbec, #000000, #fdcae3 and #f9a6d0. Off-palette pixels make up 2.3–2.7% (anti-aliasing and the logo's hot pink), against 2.4% on v1.
+  - **New illustration band:** the illustration sits at y ≈ 350–600. It's 84–135 px below the logo and **23–34 px above the date pill**. Nothing overlaps.
+- **Illustration source:** `posters-src/november/gen.mjs` draws the four illustrations (`meter`, `baby`, `vial`, `balloons`) as hand-written inline SVG shapes (circles, paths) in the palette with black outlines. The code comment says "Original vector illustrations (Mei), palette only, black outlines. No photos, no real people." I found no imported images or stock files for them; the only images loaded are the logo and the QR.
+- **Day names:** none printed (only "DD NOVEMBER 2026"). Sat 14, Sun 15, Tue 17 and Fri 20 Nov 2026, as in the brief.
+
+## Results per poster
+Checks: (1) spelling, (2) copy word for word, (3) date, (4) branches and hours, (5) source line, (6) nothing cut off / readable, (7) palette and logo, (8) QR, (9) illustration.
+
+### nov-diabetes-en-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | "Klinik Putrijaya" spelled exactly in the logo, the CTA and the 3 branch lines |
+| 2 | passed | Headline "Diabetes can be silent" and all 3 lines match the brief. **New CTA "Get your blood sugar checked at Klinik Putrijaya · Scan for our branches"** matches word for word. No prices or promotions |
+| 3 | passed | "14 NOVEMBER 2026" (Saturday) |
+| 4 | passed | Cheras Mon–Sun 8.00 AM–11.00 PM; Sungai Besi & Puchong Mon–Fri 8.00 AM–10.00 PM, Sat–Sun 9.00 AM–10.00 PM |
+| 5 | passed | "Source: WHO" |
+| 6 | passed, with a note | Nothing cut off or overlapping; the headline now fits on one line. The CTA wraps onto 2 lines and splits "Scan for / our branches" mid-phrase, which reads awkwardly (optional fix below) |
+| 7 | passed | Palette only; logo +0.19% |
+| 8 | passed | QR identical to the verified QR (0.00%) |
+| 9 | passed | A glucose meter with a drop of blood, a pink drop and sparkles. Original line art, no people. It fits the "get your blood sugar checked" CTA and claims no result, since AIN confirmed that most branches offer glucose checks |
+
+### nov-diabetes-ms-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | Logo, CTA, 3 branch lines |
+| 2 | passed | "Diabetes boleh senyap" and all 3 lines match. **New CTA "Periksa paras gula darah di Klinik Putrijaya · Imbas untuk cawangan kami"** matches word for word |
+| 3 | passed | "14 NOVEMBER 2026" |
+| 4 | passed | Isnin–Ahad / Isnin–Jumaat / Sabtu–Ahad; hours exact; "CAWANGAN" and "WAKTU BEROPERASI" |
+| 5 | passed | "Sumber: WHO" |
+| 6 | passed, with a note | Nothing cut off. The CTA wraps as "Imbas untuk / cawangan kami", splitting the phrase (optional fix below) |
+| 7 | passed | As above |
+| 8 | passed | 0.00% |
+| 9 | passed | Same illustration as EN |
+
+### nov-prematurity-en-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | Logo, CTA, 3 branch lines |
+| 2 | passed | "A strong start for every baby" and all 3 lines match. **New CTA "Start your antenatal check-ups at Klinik Putrijaya"** matches word for word |
+| 3 | passed | "15 NOVEMBER 2026" (Sunday) |
+| 4 | passed | Exact |
+| 5 | passed | "Source: WHO" |
+| 6 | passed | Nothing cut off. The headline wraps with "baby" alone on line 2, which reads fine. The CTA fits on 1 line |
+| 7 | passed | As above |
+| 8 | passed | 0.00% |
+| 9 | passed | A sleeping cartoon baby swaddled in pink, with a heart and sparkles. Drawn, not a photo of a real person. Gentle and respectful; no medical claim (no incubator or clinical equipment) |
+
+### nov-prematurity-ms-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | Logo, CTA, 3 branch lines |
+| 2 | passed | "Permulaan kukuh untuk setiap bayi" and all 3 lines match. **New CTA "Mulakan pemeriksaan antenatal di Klinik Putrijaya"** matches word for word. **The script title reads "Hari Bayi Pramatang Sedunia"**, as recommended in the brief. AIN still approves the final name |
+| 3 | passed | "15 NOVEMBER 2026" |
+| 4 | passed | Malay day names and hours exact |
+| 5 | passed | "Sumber: WHO" |
+| 6 | passed | The script title fits, with margins of 339 px left and 330 px right of 2160. The logo-to-date-pill spacing that was tight on v1 (10 px) is fixed: the illustration now sits between them, 135 px below the logo and 34 px above the pill |
+| 7 | passed | As above |
+| 8 | passed | 0.00% |
+| 9 | passed | Same illustration as EN |
+
+### nov-cervical-en-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | Logo, CTA, 3 branch lines |
+| 2 | passed | "Cervical cancer can be prevented" and all 3 lines match. **New CTA "Ask about cervical screening and the HPV vaccine at Klinik Putrijaya"** matches word for word (2 lines, wrapped at "at / Klinik Putrijaya") |
+| 3 | passed | "17 NOVEMBER 2026" (Tuesday) |
+| 4 | passed | Exact |
+| 5 | passed | "Source: WHO" |
+| 6 | passed | The long script title fits (margins 191 px and 311 px; the "y" in "Day" reaches furthest right). The second line of the HPV text now fits on one line |
+| 7 | passed | As above |
+| 8 | passed | 0.00% |
+| 9 | passed, with a note | A vaccine vial with a plus sign, and a pink shield with a check mark. Original line art, no people. The shield with a tick sits next to the vial, which visually echoes the approved WHO line "HPV vaccine protects". It doesn't add a claim beyond the copy, but it can read as "the vaccine guarantees protection". I've left that for AIN to judge |
+
+### nov-cervical-ms-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | Logo, CTA, 3 branch lines |
+| 2 | passed | "Kanser serviks boleh dicegah" and all 3 lines match. **New CTA "Tanya tentang saringan serviks dan vaksin HPV di Klinik Putrijaya"** matches word for word |
+| 3 | passed | "17 NOVEMBER 2026" |
+| 4 | passed | Malay day names and hours exact |
+| 5 | passed | "Sumber: WHO" |
+| 6 | passed | Script title margins 231 px and 284 px |
+| 7 | passed | As above |
+| 8 | passed | 0.00% |
+| 9 | passed, with the same note | Same illustration as EN |
+
+### nov-childrens-day-en-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | Logo, CTA, 3 branch lines |
+| 2 | passed (**unchanged from v1**) | "Every child, every right", the 3 lines and the CTA "Scan for our branches · Klinik Putrijaya" are word for word the same as v1 and the brief |
+| 3 | passed | "20 NOVEMBER 2026" (Friday) |
+| 4 | passed | Exact |
+| 5 | passed | "Source: UNICEF" |
+| 6 | passed | Nothing cut off |
+| 7 | passed | As above |
+| 8 | passed | 0.00% |
+| 9 | passed | Three pink and white balloons tied together, with sparkles. Festive, no people, no medical content |
+
+### nov-childrens-day-ms-v2.png
+| # | Result | Evidence |
+|---|---|---|
+| 1 | passed | Logo, CTA, 3 branch lines |
+| 2 | passed (**unchanged from v1**) | "Setiap kanak-kanak, setiap hak", the 3 lines and the CTA "Imbas untuk cawangan kami · Klinik Putrijaya" are the same as v1 and the brief |
+| 3 | passed | "20 NOVEMBER 2026" |
+| 4 | passed | Malay day names and hours exact |
+| 5 | passed | "Sumber: UNICEF" |
+| 6 | passed | Nothing cut off |
+| 7 | passed | As above |
+| 8 | passed | 0.00% |
+| 9 | passed | Same illustration as EN |
+
+## Fixes for Mei
+Nothing failed, so no fixes are required. Optional:
+1. `nov-diabetes-en-v2` and `nov-diabetes-ms-v2`: break the CTA at the "·" so each phrase stays whole: "Get your blood sugar checked at Klinik Putrijaya / Scan for our branches" and "Periksa paras gula darah di Klinik Putrijaya / Imbas untuk cawangan kami".
+2. The gap between the illustration and the date pill is 23–34 px on all 8. It doesn't overlap, but a little more space would look less crowded.
+
+The footer note from the v1 QA still applies: the hours are small at phone size, as on every poster in this template.
+
+## Verdict
+| File | Verdict |
+|---|---|
+| nov-diabetes-en-v2 | Passed on all 9 checks (CTA line break is an optional fix) |
+| nov-diabetes-ms-v2 | Passed on all 9 checks (CTA line break is an optional fix) |
+| nov-prematurity-en-v2 | Passed on all 9 checks |
+| nov-prematurity-ms-v2 | Passed on all 9 checks; "Hari Bayi Pramatang Sedunia" fits; final name for AIN |
+| nov-cervical-en-v2 | Passed on all 9 checks (shield-and-vial note for AIN) |
+| nov-cervical-ms-v2 | Passed on all 9 checks (shield-and-vial note for AIN) |
+| nov-childrens-day-en-v2 | Passed on all 9 checks; wording unchanged from v1 |
+| nov-childrens-day-ms-v2 | Passed on all 9 checks; wording unchanged from v1 |
