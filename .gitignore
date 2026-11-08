@@ -5,3 +5,4 @@ node_modules
 .install.log
 web/dist
 storage/
+posters-src/november/*.html
