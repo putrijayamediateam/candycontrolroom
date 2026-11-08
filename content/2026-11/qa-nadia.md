@@ -143,3 +143,51 @@ No check failed, so there are no required fixes. Optional:
 | nov-childrens-day-ms | Passed on checks 1–7; QR not verified |
 
 To close the QR check, someone needs to scan one poster with a phone and confirm it opens https://linktr.ee/qr/3cb0d33d-ae3d-4a69-bce6-aff77224d944. AIN can do this.
+
+---
+
+# Deepavali greeting (urgent, for 8 Nov)
+
+QA by **Nadia**, 8 Nov 2026, before CANDY's review. QA only; not an approval.
+Files: `assets/posters/nov-deepavali-en.png` and `nov-deepavali-ms.png`, both 2160×2700.
+Checked against the "Deepavali greeting" section at the top of `content/2026-11/november-brief.md`.
+
+## How I checked
+- **Text, layout and imagery:** I opened both PNGs and read them on screen.
+- **Logo:** pink bounding box 807–1352 × 112–266 px on both, aspect ratio 3.5226 vs 3.5159 for `assets/logo.png` (+0.19%, rounding). Not distorted.
+- **Palette:** the only colours covering more than 0.3% of the poster are #ffffff, #fddbec, #fdcae3, #000000 and #f9a6d0. Off-palette pixels make up 3.4% (EN) and 3.6% (MS), against 1.9–2.4% on the earlier posters. The extra 1.8% is the soft glow behind the three lamps, which fades from palette pink to white. The rest is anti-aliasing and the logo's hot pink, which is allowed.
+- **QR:** On these posters the QR is drawn **smaller**: 160 px square at x 1848, y 2468, against 224 px on the earlier posters. That means a pixel-for-pixel comparison isn't possible. Instead I read the QR's 41×41 module grid (3.9 px per module) and compared it with `assets/qr.png` and with the earlier posters:
+  - Outside the centre logo, **1511 of 1512 modules match** `assets/qr.png`. At this small size, one misread module is within what my reading can get wrong.
+  - The earlier posters (influenza-en, nov-diabetes-en) match all 1512, so it's the same code.
+  - I didn't decode the QR myself.
+
+## nov-deepavali-en.png
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | "Klinik Putrijaya" spelling | passed | Spelled exactly in the logo and the sign-off |
+| 2 | Headline, wish line, sign-off | passed | Script "Happy" plus "DEEPAVALI" = "Happy Deepavali". "May your home be filled with light, joy and togetherness." and "From all of us at Klinik Putrijaya" match exactly. The QR label "Scan for our branches" isn't in the Deepavali copy; it's the standard QR label |
+| 3 | No health claims, prices or hours | passed | None. No footer with branches or hours |
+| 4 | Nothing cut off or overlapping; readable on a phone | passed, with a note | No clipping or overlap. Headline, wish line and sign-off are large. The QR and its label are smaller than on the other posters (QR 160 px vs 224 px), so the QR will be harder to scan off a phone screen |
+| 5 | Palette, black text, logo | passed | All text is black on white or #fddbec. Logo not distorted. The lamp glow is a pink-to-white tint (see method) |
+| 6 | QR | passed | Same QR as `assets/qr.png` and the earlier posters: 1511/1512 modules match outside the logo. Not pixel-identical because it's drawn smaller. AIN verified the QR by phone on 8 Nov (per CANDY), but I don't know which poster she scanned. Scanning this poster once would confirm it at the smaller size |
+| 7 | Respectful imagery | passed | Three simple oil lamps (diyas), one round kolam-style flower and outline sparkles. No religious figures, deities, symbols or text |
+
+## nov-deepavali-ms.png
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Spelling | passed | Logo and sign-off |
+| 2 | Headline, wish line, sign-off | passed | Script "Selamat Hari" plus "DEEPAVALI" = "Selamat Hari Deepavali". "Semoga rumah anda dipenuhi cahaya, kegembiraan dan kebersamaan." and "Daripada kami semua di Klinik Putrijaya" match exactly. QR label "Imbas untuk cawangan kami" |
+| 3 | No health claims, prices or hours | passed | None |
+| 4 | Layout and readability | passed, with a note | No clipping or overlap. Same small-QR note as EN |
+| 5 | Palette and logo | passed | Same results as EN |
+| 6 | QR | passed | Same module result as EN (1511/1512) |
+| 7 | Respectful imagery | passed | Same artwork as EN |
+
+## Fixes for Mei
+Nothing failed, so there are no required fixes. Optional, only if there's time today: make the QR the same size as on the other posters (about 224 px) so it scans easily from a phone screen.
+
+## Verdict
+| Poster | Verdict |
+|---|---|
+| nov-deepavali-en | Passed on all 7 checks (QR smaller than usual) |
+| nov-deepavali-ms | Passed on all 7 checks (QR smaller than usual) |

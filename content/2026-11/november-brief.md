@@ -7,6 +7,24 @@ Branches and hours come only from `docs/DECISIONS.md`: Klinik Putrijaya Cheras, 
 
 ---
 
+## Deepavali greeting — Sun 8 Nov 2026 (today) (Iman)
+
+Requested by AIN on 8 Nov. No health claims, no religious detail, no opening or holiday hours.
+
+**EN**
+- Headline: **Happy Deepavali**
+- Wish line: May your home be filled with light, joy and togetherness.
+- Sign-off: From all of us at Klinik Putrijaya
+- Caption (Facebook / Instagram): Happy Deepavali to all who celebrate! May this festival of lights bring joy and togetherness to you and your loved ones, and to every Malaysian family. From all of us at Klinik Putrijaya ✨ #HappyDeepavali
+
+**MS**
+- Headline: **Selamat Hari Deepavali**
+- Wish line: Semoga rumah anda dipenuhi cahaya, kegembiraan dan kebersamaan.
+- Sign-off: Daripada kami semua di Klinik Putrijaya
+- Caption (Facebook / Instagram): Selamat Hari Deepavali kepada semua yang meraikannya! Semoga pesta cahaya ini membawa kegembiraan dan kebersamaan kepada anda sekeluarga dan seluruh rakyat Malaysia. Daripada kami semua di Klinik Putrijaya ✨ #SelamatHariDeepavali
+
+---
+
 ## 1. Dates & sources (Sara)
 
 All checked on **8 Nov 2026** by web search and, where noted, by opening the official page. "Official" means set by WHO/the World Health Assembly, a UN body, or the Malaysian government. "Organiser-led" means a recognised campaign without a UN/WHO resolution.
@@ -44,9 +62,9 @@ At most one poster topic per day. Feed posters on Facebook and Instagram. Slots 
 | 4 | World Children's Day | Fri 20 Nov | 17:00 | A warm family post with no clinical claim; matches UNICEF Malaysia's blue landmark lighting that evening |
 
 Per topic
-1. **Diabetes.** Audience: adults 30+, families, people managing weight. Hook: "Diabetes can be silent." CTA: Visit Klinik Putrijaya / scan for our branches. Platforms: Facebook and Instagram.
-2. **Prematurity.** Audience: pregnant mothers, new and postnatal mothers. Hook: "1 in 10 babies is born too soon." CTA: start antenatal check-ups early; visit Klinik Putrijaya. Platforms: Facebook and Instagram.
-3. **Cervical cancer.** Audience: women 20+, mothers of daughters aged 9–14. Hook: "Cervical cancer can be prevented." CTA: ask your doctor about screening; visit Klinik Putrijaya. Platforms: Facebook and Instagram.
+1. **Diabetes.** Audience: adults 30+, families, people managing weight. Hook: "Diabetes can be silent." CTA: Get your blood sugar checked at Klinik Putrijaya / scan for our branches. Platforms: Facebook and Instagram.
+2. **Prematurity.** Audience: pregnant mothers, new and postnatal mothers. Hook: "1 in 10 babies is born too soon." CTA: Start your antenatal check-ups at Klinik Putrijaya. Platforms: Facebook and Instagram.
+3. **Cervical cancer.** Audience: women 20+, mothers of daughters aged 9–14. Hook: "Cervical cancer can be prevented." CTA: Ask about cervical screening and the HPV vaccine at Klinik Putrijaya. Platforms: Facebook and Instagram.
 4. **Children's Day.** Audience: parents and families. Hook: "Every child, every right." CTA: scan for our branches. Platforms: Facebook and Instagram.
 
 **Story idea (doesn't count toward the feed target):** a 3-frame Story for World AMR Awareness Week, Wed 18 Nov at 12:00. Frame 1: "What is AMR?" Frame 2: the WHO definition (germs stop responding to the medicines meant to kill them). Frame 3: "Use antibiotics only as advised by your doctor" plus the QR. The frame 3 wording must be tied to a WHO public-advice page before use. The fact sheet I opened only says misuse drives resistance, so Sara needs to find the exact WHO advice line first.
@@ -57,7 +75,7 @@ Skipped: World Pneumonia Day (no verified organiser page or 2026 theme yet). Dee
 
 ## 3. Copy EN / MS per poster (Iman)
 
-Rules applied: no prices, promotions, discounts, appointment slots, testimonials or patient stories. No claim that Klinik Putrijaya offers a specific test or vaccine until AIN confirms (see open questions). Every health line is tied to a source below.
+Rules applied: no prices, promotions, discounts, appointment slots, testimonials or patient stories. CTAs updated 8 Nov after AIN confirmed that most branches offer glucose checks, antenatal check-ups, cervical screening and the HPV vaccine, though not necessarily every branch. The wording never promises every service at every branch, and the captions point to the QR for each branch's services. Every health line is tied to a source below.
 
 ### Poster 1 — World Diabetes Day (Sat 14 Nov)
 
@@ -67,9 +85,9 @@ Rules applied: no prices, promotions, discounts, appointment slots, testimonials
   - More than 40% of people with diabetes don't know they have it.
   - Thirst, frequent urination, tiredness, blurred vision — don't ignore the signs.
   - Early action starts with a check.
-- CTA: Visit Klinik Putrijaya · Scan for our branches
-- Facebook caption: 14 November is World Diabetes Day. This year's theme is "Early action on diabetes". WHO says more than 40% of people living with diabetes are undiagnosed, and type 2 can show few or no symptoms. Talk to a doctor about getting checked. Klinik Putrijaya Cheras, Sungai Besi and Puchong. Scan the QR for our branches. #WorldDiabetesDay #ActEarlyOnDiabetes
-- Instagram caption: Diabetes can be silent. More than 40% of people with diabetes don't know it (WHO). Act early: get checked. 📍 Klinik Putrijaya Cheras · Sungai Besi · Puchong. Link in bio. #WorldDiabetesDay #ActEarlyOnDiabetes
+- CTA: Get your blood sugar checked at Klinik Putrijaya · Scan for our branches
+- Facebook caption: 14 November is World Diabetes Day. This year's theme is "Early action on diabetes". WHO says more than 40% of people living with diabetes are undiagnosed, and type 2 can show few or no symptoms. Get your blood sugar checked at Klinik Putrijaya. Scan the QR to find your nearest branch and the services it offers. #WorldDiabetesDay #ActEarlyOnDiabetes
+- Instagram caption: Diabetes can be silent. More than 40% of people with diabetes don't know it (WHO). Act early: get your blood sugar checked at Klinik Putrijaya. 📍 Branches and services: link in bio. #WorldDiabetesDay #ActEarlyOnDiabetes
 
 **MS**
 - Headline: **Diabetes boleh senyap**
@@ -77,9 +95,9 @@ Rules applied: no prices, promotions, discounts, appointment slots, testimonials
   - Lebih 40% penghidap diabetes tidak tahu mereka menghidapnya.
   - Kerap dahaga, kerap buang air kecil, letih, penglihatan kabur — jangan abaikan tandanya.
   - Tindakan awal bermula dengan pemeriksaan.
-- CTA: Kunjungi Klinik Putrijaya · Imbas untuk cawangan kami
-- Caption Facebook: 14 November ialah Hari Diabetes Sedunia, bertemakan "Early action on diabetes" (Tindakan awal terhadap diabetes). Menurut WHO, lebih 40% penghidap diabetes tidak didiagnosis, dan diabetes jenis 2 mungkin tidak menunjukkan sebarang gejala. Berbincanglah dengan doktor tentang pemeriksaan. Klinik Putrijaya Cheras, Sungai Besi dan Puchong. Imbas kod QR untuk cawangan kami. #HariDiabetesSedunia #ActEarlyOnDiabetes
-- Caption Instagram: Diabetes boleh senyap. Lebih 40% penghidap tidak tahu (WHO). Bertindak awal: buat pemeriksaan. 📍 Klinik Putrijaya Cheras · Sungai Besi · Puchong. Pautan di bio. #HariDiabetesSedunia
+- CTA: Periksa paras gula darah di Klinik Putrijaya · Imbas untuk cawangan kami
+- Caption Facebook: 14 November ialah Hari Diabetes Sedunia, bertemakan "Early action on diabetes" (Tindakan awal terhadap diabetes). Menurut WHO, lebih 40% penghidap diabetes tidak didiagnosis, dan diabetes jenis 2 mungkin tidak menunjukkan sebarang gejala. Periksa paras gula darah anda di Klinik Putrijaya. Imbas kod QR untuk cawangan terdekat dan perkhidmatan yang ditawarkan. #HariDiabetesSedunia #ActEarlyOnDiabetes
+- Caption Instagram: Diabetes boleh senyap. Lebih 40% penghidap tidak tahu (WHO). Bertindak awal: periksa paras gula darah di Klinik Putrijaya. 📍 Cawangan dan perkhidmatan: pautan di bio. #HariDiabetesSedunia
 
 Source: WHO, World Diabetes Day 2026, https://www.who.int/campaigns/world-diabetes-day/2026 (checked 8 Nov 2026).
 
@@ -91,9 +109,9 @@ Source: WHO, World Diabetes Day 2026, https://www.who.int/campaigns/world-diabet
   - Around 1 in 10 babies is born before 37 weeks.
   - WHO advises at least 8 antenatal contacts, starting before 12 weeks.
   - Start your pregnancy check-ups early.
-- CTA: Visit Klinik Putrijaya · Scan for our branches
-- Facebook caption: 15 November is World Prematurity Day. WHO says around 1 in 10 babies worldwide is born preterm, before 37 weeks of pregnancy. WHO recommends at least 8 contacts with health professionals during pregnancy, starting before 12 weeks. Give your baby a strong start. Klinik Putrijaya Cheras, Sungai Besi and Puchong. Scan the QR for our branches. #WorldPrematurityDay
-- Instagram caption: 1 in 10 babies is born too soon (WHO). Early, regular antenatal care matters: at least 8 contacts, starting before 12 weeks. 💛 Klinik Putrijaya Cheras · Sungai Besi · Puchong. Link in bio. #WorldPrematurityDay
+- CTA: Start your antenatal check-ups at Klinik Putrijaya
+- Facebook caption: 15 November is World Prematurity Day. WHO says around 1 in 10 babies worldwide is born preterm, before 37 weeks of pregnancy. WHO recommends at least 8 contacts with health professionals during pregnancy, starting before 12 weeks. Give your baby a strong start: begin your antenatal check-ups at Klinik Putrijaya. Scan the QR to find your nearest branch and the services it offers. #WorldPrematurityDay
+- Instagram caption: 1 in 10 babies is born too soon (WHO). Early, regular antenatal care matters: at least 8 contacts, starting before 12 weeks. 💛 Start your antenatal check-ups at Klinik Putrijaya. Branches and services: link in bio. #WorldPrematurityDay
 
 **MS**
 - Headline: **Permulaan kukuh untuk setiap bayi**
@@ -101,9 +119,9 @@ Source: WHO, World Diabetes Day 2026, https://www.who.int/campaigns/world-diabet
   - Kira-kira 1 daripada 10 bayi lahir sebelum 37 minggu.
   - WHO mengesyorkan sekurang-kurangnya 8 sesi pemeriksaan antenatal, bermula sebelum 12 minggu.
   - Mulakan pemeriksaan kehamilan anda awal.
-- CTA: Kunjungi Klinik Putrijaya · Imbas untuk cawangan kami
-- Caption Facebook: 15 November ialah Hari Pramatang Sedunia. Menurut WHO, kira-kira 1 daripada 10 bayi di seluruh dunia lahir pramatang, iaitu sebelum 37 minggu kehamilan. WHO mengesyorkan sekurang-kurangnya 8 sesi bersama profesional kesihatan sepanjang kehamilan, bermula sebelum 12 minggu. Berikan bayi anda permulaan yang kukuh. Klinik Putrijaya Cheras, Sungai Besi dan Puchong. Imbas kod QR untuk cawangan kami. #HariPramatangSedunia
-- Caption Instagram: 1 daripada 10 bayi lahir terlalu awal (WHO). Pemeriksaan antenatal awal dan berkala penting: sekurang-kurangnya 8 sesi, bermula sebelum 12 minggu. 💛 Klinik Putrijaya Cheras · Sungai Besi · Puchong. Pautan di bio. #HariPramatangSedunia
+- CTA: Mulakan pemeriksaan antenatal di Klinik Putrijaya
+- Caption Facebook: 15 November ialah Hari Bayi Pramatang Sedunia. Menurut WHO, kira-kira 1 daripada 10 bayi di seluruh dunia lahir pramatang, iaitu sebelum 37 minggu kehamilan. WHO mengesyorkan sekurang-kurangnya 8 sesi bersama profesional kesihatan sepanjang kehamilan, bermula sebelum 12 minggu. Berikan bayi anda permulaan yang kukuh: mulakan pemeriksaan antenatal di Klinik Putrijaya. Imbas kod QR untuk cawangan terdekat dan perkhidmatan yang ditawarkan. #HariBayiPramatangSedunia
+- Caption Instagram: 1 daripada 10 bayi lahir terlalu awal (WHO). Pemeriksaan antenatal awal dan berkala penting: sekurang-kurangnya 8 sesi, bermula sebelum 12 minggu. 💛 Mulakan pemeriksaan antenatal di Klinik Putrijaya. Cawangan dan perkhidmatan: pautan di bio. #HariBayiPramatangSedunia
 
 Sources: WHO, World Prematurity Day 2025, https://www.who.int/campaigns/world-prematurity-day/2025 · WHO preterm birth fact sheet, https://www.who.int/news-room/fact-sheets/detail/preterm-birth (both checked 8 Nov 2026).
 
@@ -115,9 +133,9 @@ Sources: WHO, World Prematurity Day 2025, https://www.who.int/campaigns/world-pr
   - Almost all cases are caused by HPV.
   - HPV vaccine protects; screening finds changes early.
   - Found early, it can be cured.
-- CTA: Ask your doctor about screening · Visit Klinik Putrijaya
-- Facebook caption: 17 November is World Cervical Cancer Elimination Day. WHO says almost all cervical cancers are caused by HPV. HPV vaccination is a priority for girls aged 9–14, and regular screening can find changes before they become cancer. Vaccination does not replace screening. Ask your doctor what's right for you. Klinik Putrijaya Cheras, Sungai Besi and Puchong. #CervicalCancerEliminationDay
-- Instagram caption: Prevent it. Detect it early. HPV vaccine + regular screening (WHO). Talk to your doctor. 📍 Klinik Putrijaya Cheras · Sungai Besi · Puchong. Link in bio. #CervicalCancerEliminationDay
+- CTA: Ask about cervical screening and the HPV vaccine at Klinik Putrijaya
+- Facebook caption: 17 November is World Cervical Cancer Elimination Day. WHO says almost all cervical cancers are caused by HPV. HPV vaccination is a priority for girls aged 9–14, and regular screening can find changes before they become cancer. Vaccination does not replace screening. Ask about cervical screening and the HPV vaccine at Klinik Putrijaya. Scan the QR to find your nearest branch and the services it offers. #CervicalCancerEliminationDay
+- Instagram caption: Prevent it. Detect it early. HPV vaccine + regular screening (WHO). Ask about both at Klinik Putrijaya. 📍 Branches and services: link in bio. #CervicalCancerEliminationDay
 
 **MS**
 - Headline: **Kanser serviks boleh dicegah**
@@ -125,9 +143,9 @@ Sources: WHO, World Prematurity Day 2025, https://www.who.int/campaigns/world-pr
   - Hampir semua kes berpunca daripada HPV.
   - Vaksin HPV melindungi; saringan mengesan perubahan lebih awal.
   - Jika dikesan awal, ia boleh dirawat sehingga sembuh.
-- CTA: Tanya doktor tentang saringan · Kunjungi Klinik Putrijaya
-- Caption Facebook: 17 November ialah Hari Penghapusan Kanser Serviks Sedunia. Menurut WHO, hampir semua kanser serviks berpunca daripada HPV. Vaksinasi HPV diutamakan untuk kanak-kanak perempuan berumur 9–14 tahun, dan saringan berkala dapat mengesan perubahan sebelum menjadi kanser. Vaksinasi tidak menggantikan saringan. Tanya doktor anda. Klinik Putrijaya Cheras, Sungai Besi dan Puchong. #HariPenghapusanKanserServiks
-- Caption Instagram: Cegah. Kesan awal. Vaksin HPV + saringan berkala (WHO). Berbincanglah dengan doktor anda. 📍 Klinik Putrijaya Cheras · Sungai Besi · Puchong. Pautan di bio.
+- CTA: Tanya tentang saringan serviks dan vaksin HPV di Klinik Putrijaya
+- Caption Facebook: 17 November ialah Hari Penghapusan Kanser Serviks Sedunia. Menurut WHO, hampir semua kanser serviks berpunca daripada HPV. Vaksinasi HPV diutamakan untuk kanak-kanak perempuan berumur 9–14 tahun, dan saringan berkala dapat mengesan perubahan sebelum menjadi kanser. Vaksinasi tidak menggantikan saringan. Tanya tentang saringan serviks dan vaksin HPV di Klinik Putrijaya. Imbas kod QR untuk cawangan terdekat dan perkhidmatan yang ditawarkan. #HariPenghapusanKanserServiks
+- Caption Instagram: Cegah. Kesan awal. Vaksin HPV + saringan berkala (WHO). Tanya tentang kedua-duanya di Klinik Putrijaya. 📍 Cawangan dan perkhidmatan: pautan di bio.
 
 Sources: WHO cervical cancer fact sheet, https://www.who.int/news-room/fact-sheets/detail/cervical-cancer · WHA78.8 day designation, https://www.afro.who.int/countries/south-africa/news/world-health-assembly-endorses-17-november-world-cervical-cancer-elimination-day-south-africa-and (checked 8 Nov 2026).
 
@@ -157,8 +175,19 @@ Source: UNICEF Malaysia, https://www.unicef.org/malaysia/world-childrens-day (ch
 
 ---
 
-## Open questions for AIN
-1. Do Klinik Putrijaya branches offer **blood glucose checks**, **antenatal check-ups**, **cervical screening (Pap/HPV test)** and the **HPV vaccine**? If yes, we can change the CTAs to "Get checked at Klinik Putrijaya". Until then, the copy only says "talk to your doctor".
-2. Do you want a **Deepavali greeting** (today, replacement holiday Mon 9 Nov)? It's not in the plan.
-3. Which slots do you prefer? Defaults above: 14 Nov 20:00, 15 Nov 12:00, 17 Nov 20:00, 20 Nov 17:00.
-4. Is the Malay name for World Prematurity Day ("Hari Pramatang Sedunia") the term you want? I couldn't find a KKM page using it.
+## Malay name for World Prematurity Day (Sara + Iman)
+
+AIN said "Hari Pramatang Sedunia" isn't suitable. Searched on 8 Nov 2026.
+
+- **Recommended: "Hari Bayi Pramatang Sedunia".** "Bayi pramatang" is the everyday Malay term for preterm babies, so the name is clear at a glance and matches WHO's focus on preterm babies. Search found no page using this exact name, so it's our proposal, not an established term.
+- Alternative 1: "Hari Anak Pramatang Sedunia". This form appears in Malaysian coverage: Kosmo reported that Ipoh City Council lit landmarks purple for "Hari Anak Pramatang Sedunia 2020" (https://www.kosmo.com.my/2020/11/18/limpahan-cahaya-ungu-simbolik-sambutan-hari-anak-pramatang/, found via search on 8 Nov 2026; article not opened). "Anak" is less precise than "bayi".
+- Alternative 2: "Hari Kelahiran Pramatang Sedunia". Closest to "prematurity" (the birth itself) and suits the antenatal angle, but it's longer for a headline.
+- KKM / MyHealth: no KKM or myhealth.gov.my page using a Malay name for this day was found.
+- The MS copy for poster 2 now uses "Hari Bayi Pramatang Sedunia" (#HariBayiPramatangSedunia). AIN approves the final name on the poster.
+
+## Answered by AIN (8 Nov 2026)
+- Services: most branches offer glucose checks, antenatal check-ups, cervical screening and the HPV vaccine, but not necessarily all of them at every branch. CTAs for posters 1–3 updated; poster 4 unchanged.
+- Deepavali greeting: yes, for today. See the section at the top.
+- Slots: approved as planned (14 Nov 20:00, 15 Nov 12:00, 17 Nov 20:00, 20 Nov 17:00).
+- QR: works (AIN scanned it).
+- Malay name for World Prematurity Day: "Hari Pramatang Sedunia" rejected; recommendation above.
