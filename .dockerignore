@@ -1,0 +1,16 @@
+# Never ship secrets, local data or other sessions' work in the image.
+.env
+.env.*
+!.env.example
+.local-*
+storage/
+storage-*/
+.claude/
+**/.claude/
+.git/
+node_modules/
+web/dist/
+*.log
+.install.log
+posters-src/
+test/
