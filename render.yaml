@@ -1,0 +1,45 @@
+# Render Blueprint for CANDY Control Room (Singapore). Prepared, NOT applied: AIN creates the
+# Render account and approves the cost first (see docs/DEPLOY.md). No secrets live in this file.
+services:
+  - type: web
+    name: candy-control-room
+    runtime: docker
+    region: singapore
+    plan: starter                 # always on (no sleep), needed for the live event stream
+    healthCheckPath: /api/health
+    autoDeploy: false             # deploy only when AIN or Ryan chooses to
+    disk:
+      name: candy-data
+      mountPath: /data            # /data/storage (uploads) and /data/assets (posters, video)
+      sizeGB: 5
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: candy-db
+          property: connectionString   # internal address inside Render's private network
+      - key: HOST
+        value: 0.0.0.0
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: STORAGE_DIR
+        value: /data/storage
+      - key: ASSETS_DIR
+        value: /data/assets
+      - key: TZ_CLINIC
+        value: Asia/Kuala_Lumpur
+      - key: WORKER_TOKEN          # AIN pastes her own long random value in the Render dashboard
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: SECRETS_MASTER_KEY    # paste the same value as on her PC so stored secrets stay readable
+        sync: false
+
+databases:
+  - name: candy-db
+    region: singapore
+    plan: basic-256mb             # upgrade to basic-1gb if it feels slow
+    postgresMajorVersion: "16"
+    databaseName: candy
+    ipAllowList: []               # no public access; only services inside Render can connect

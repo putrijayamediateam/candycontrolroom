@@ -40,5 +40,5 @@ Open: AIN to confirm prices/dates still current; Tabung Haji logo permission; co
 | Staff execution via Claude sessions | Planned |
 | Meta / TikTok / GBP publishing | Requires connection + platform app review |
 | Analytics | Requires connections |
-| Permanent hosting | Not decided |
+| Permanent hosting | Approved by AIN 11 Nov 2026: Render Singapore, ~USD 14.55/month. Prepared on branch `claude/hosting` (Dockerfile, render.yaml, docs/DEPLOY.md, 13 hosting tests); not deployed yet: waiting for CANDY release review, and AIN creating the GitHub and Render accounts |
 | GitHub repo | Requires connection (sandbox token was invalid) |

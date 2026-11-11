@@ -1,5 +1,5 @@
 import pg from 'pg';
-import type { Db } from './db/pool.js';
+import { poolConfig, type Db } from './db/pool.js';
 
 /** One row of the append-only `events` table, as sent to clients. */
 export interface EventRow {
@@ -46,7 +46,7 @@ export class EventHub {
   }
 
   private async connect() {
-    const client = new pg.Client({ connectionString: this.url });
+    const client = new pg.Client(poolConfig(this.url, process.env)); // same TLS settings as the pool
     client.on('notification', (n) => { if (n.channel === 'candy_events' && n.payload) void this.deliver(n.payload); });
     client.on('error', () => this.reconnectSoon());
     client.on('end', () => this.reconnectSoon());

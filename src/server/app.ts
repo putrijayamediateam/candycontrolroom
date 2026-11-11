@@ -37,7 +37,29 @@ export interface AppOptions {
   logger?: boolean;
   /** Heartbeat interval for the event stream (ms). */
   streamHeartbeatMs?: number;
+  /**
+   * Behind a hosting proxy: how many proxy hops to trust for the client IP (X-Forwarded-For), so the
+   * login throttle sees the real address. false (default) = use the socket address. Never trust all hops.
+   */
+  trustProxy?: false | number;
+  /** Send Strict-Transport-Security (only when served over HTTPS). */
+  hsts?: boolean;
 }
+
+/** Trust exactly N proxy hops (closest first) for X-Forwarded-For; false trusts none. */
+function trustHops(hops: false | number) {
+  return hops === false ? false : (_addr: string, hop: number) => hop < hops;
+}
+
+/** Headers added to every response unless a route already set them. */
+export const SECURITY_HEADERS: Record<string, string> = {
+  'x-content-type-options': 'nosniff',
+  'x-frame-options': 'DENY',
+  'referrer-policy': 'same-origin',
+  'cross-origin-opener-policy': 'same-origin',
+  'cross-origin-resource-policy': 'same-origin',
+  'permissions-policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
+};
 
 const PUBLIC_ROUTES = new Set(['/api/health', '/api/auth/login']);
 const PLATFORMS = ['facebook', 'instagram', 'tiktok', 'threads', 'gbp', 'youtube'] as const;
@@ -72,7 +94,14 @@ export async function buildApp(opts: AppOptions): Promise<FastifyInstance> {
   const secure = opts.secureCookies ?? false;
   const assetsDir = resolve(opts.assetsDir ?? resolve(process.cwd(), 'assets'));
   const throttle = new LoginThrottle();
-  const app = Fastify({ logger: opts.logger ?? false, bodyLimit: 1_000_000 });
+  const app = Fastify({ logger: opts.logger ?? false, bodyLimit: 1_000_000, trustProxy: trustHops(opts.trustProxy ?? false) });
+
+  // ---------- Security headers ----------
+  app.addHook('onSend', async (req, reply, payload) => {
+    for (const [k, v] of Object.entries(SECURITY_HEADERS)) if (!reply.hasHeader(k)) reply.header(k, v);
+    if (opts.hsts) reply.header('strict-transport-security', 'max-age=15552000; includeSubDomains');
+    return payload;
+  });
 
   // ---------- Cross-site request protection ----------
   // Browsers cannot add custom headers to cross-site requests without a CORS preflight, and CORS is not enabled.
